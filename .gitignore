@@ -29,3 +29,5 @@ node_modules/
 bower_components/
 database/data/
 
+# Package JSON
+package-lock.json

@@ -31,4 +31,7 @@ database/data/
 
 # Package JSON
 package-lock.json
+<<<<<<< a22c0d00177d9efbf86408c68c142a7c4368bf30
 
+=======
+>>>>>>> Alter package.json file

@@ -7,8 +7,9 @@
   "engines": {
     "node": ">=6.4.0"
   },
+  "main": "index.js",
   "scripts": {
-    "start": "nodemon ./server/index.js"
+    "start": "node ./server/index.js"
   },
   "dependencies": {
     "express": "^4.15.3"

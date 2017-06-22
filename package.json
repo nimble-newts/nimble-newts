@@ -7,6 +7,7 @@
   "engines": {
     "node": ">=6.4.0"
   },
+  "main": "index.js",
   "scripts": {
     "lint" : "eslint . --ext .js,.jsx",
     "pretest" : "npm run lint", 

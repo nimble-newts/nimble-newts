@@ -45,7 +45,7 @@ bower install
 
 ### Roadmap
 
-View the project roadmap [here](https://docs.google.com/document/d/1zo69SNApdGXm3c8PZ-Gjjov_5I5SiNbJnBponWxZ8Lw/edit?usp=sharing)
+View the project roadmap [here](https://docs.google.com/document/d/1DHAam9WiYRBCaaJSKQjrYgv8SejzyGQ-Aw_TC8kncEY/edit?usp=sharing)
 
 
 ## Contributing

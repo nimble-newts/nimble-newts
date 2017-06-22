@@ -1,13 +1,12 @@
 # Project Name
-
+Nimble Newts Ultimate Unicorn Funtime App!!
 > Pithy project description
 
 ## Team
 
-  - teamMember
-  - teamMember
-  - teamMember
-  - teamMember
+  - Jennifer Wang
+  - Gideon Baik
+  - Victor Ngo
 
 ## Table of Contents
 
@@ -25,11 +24,12 @@
 
 ## Requirements
 
-- Node 6.4.x
-- Redis 2.6.x
-- Postgresql 9.1.x
-- etc
-- etc
+- MongoDB
+- Mongoose
+- Express
+- React
+- Node
+- Passpost
 
 ## Development
 
@@ -45,7 +45,7 @@ bower install
 
 ### Roadmap
 
-View the project roadmap [here](LINK_TO_DOC)
+View the project roadmap [here](https://docs.google.com/document/d/1DHAam9WiYRBCaaJSKQjrYgv8SejzyGQ-Aw_TC8kncEY/edit?usp=sharing)
 
 
 ## Contributing

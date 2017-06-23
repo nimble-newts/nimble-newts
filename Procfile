@@ -1,1 +1,1 @@
-web:  node ./server/index.js $PORT
+web:  npm start

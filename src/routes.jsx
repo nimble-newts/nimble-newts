@@ -10,13 +10,13 @@ import { Profile } from './components/Profile';
 
 const Routes = ({ store }) => {
   return
-  	<Provider store={store}> 
-	    <Router history={browserHistory}>
-	        <Route path="/(:filter)" component={Login}>
-	        <Route path="/search" component={Search}>
-	        <Route path="/profile" component={Profile}>
-	    </Router>
-	  </Provider>
+    <Provider store={store}> 
+      <Router history={browserHistory}>
+          <Route path="/(:filter)" component={Login}>
+          <Route path="/search" component={Search}>
+          <Route path="/profile" component={Profile}>
+      </Router>
+    </Provider>
 };
 
 export default Routes;

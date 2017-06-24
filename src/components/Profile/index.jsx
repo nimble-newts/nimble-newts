@@ -1,7 +1,7 @@
 import React from 'react';
-import { User } from './user.jsx';
-import { Friends } from './friends.jsx';
-import { Suggestions } from './suggestions.jsx';
+import { User } from './User.jsx';
+import { Friends } from './Friends.jsx';
+import { Suggestions } from './Suggestions.jsx';
 
 const Profile = ({}) => (   
   <div className="Profile">

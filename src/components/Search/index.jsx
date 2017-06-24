@@ -1,5 +1,5 @@
 import React from 'react';
-import { SearchBar } from './searchbar';
+import { SearchBar } from './Searchbar.jsx';
 
 const Search = ({}) => (
   <div className="Search">

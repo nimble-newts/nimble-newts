@@ -26,4 +26,10 @@ dist/
 # Deployed apps should consider commenting these lines out:
 # see https://npmjs.org/doc/faq.html#Should-I-check-my-node_modules-folder-into-git
 node_modules/
+<<<<<<< 40fc89b8b147a0a1aa9f1bba02f2b8adef8a4a83
 bower_components/
+=======
+bower_components/
+
+database/data/
+>>>>>>> (setup) Add mongodb as dependency.

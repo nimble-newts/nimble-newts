@@ -24,7 +24,7 @@ Nimble Newts Ultimate Unicorn Funtime App!!
 
 ## Requirements
 
-- MongoDB
+- MongoDB 
 - Mongoose
 - Express
 - React

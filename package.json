@@ -8,7 +8,7 @@
     "node": ">=6.4.0"
   },
   "scripts": {
-    "lint" : "eslint . --ext .js",
+    "lint" : "eslint . --ext .js,.jsx",
     "pretest" : "npm run lint", 
     "test" : "mocha spec"
   },

@@ -4,15 +4,13 @@ import { setActivity, setAddresses } from '../actions';
 
 //GenerateSearch
 
-const mapStateToProps = state => {
-  //map state properties to reducers
-};
+// const mapStateToProps = state => (
+//map state properties to reducers
+// );
 
-const mapDispatchToProps = dispatch => {
-  return {
-    //map dispatch action to a prop in components
-  }
-};
+// const mapDispatchToProps = dispatch => (
+//map dispatch action to a prop in components
+// );
 
 /* const GenerateSearch = connect(
   mapStateToProps,

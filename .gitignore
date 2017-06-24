@@ -26,8 +26,11 @@ dist/
 # Deployed apps should consider commenting these lines out:
 # see https://npmjs.org/doc/faq.html#Should-I-check-my-node_modules-folder-into-git
 node_modules/
+<<<<<<< e5f33be71f0688252df33ea59fa7458f8ae7cd0e
 bower_components/
 database/data/
 
 # Package JSON
 package-lock.json
+bower_components/
+database/data/

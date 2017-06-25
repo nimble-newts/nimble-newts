@@ -37,11 +37,6 @@
     "eslint": "^4.0.0",
     "eslint-plugin-react": "^7.1.0",
     "mocha": "^3.4.2",
-<<<<<<< 1ceff7d0b69e7e9a16b43dc8a475315ba2fad941
     "webpack": "^3.0.0"
   }
-=======
-    "webpack": "^3.0.0",
-  },
->>>>>>> (change) add another gitignore cause last one died.
 }

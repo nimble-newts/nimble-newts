@@ -2,3 +2,5 @@
 **/node_modules
 compiled/**
 dist/bundle.js
+spec
+database/db.js

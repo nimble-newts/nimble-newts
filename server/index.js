@@ -1,10 +1,15 @@
-var express = require('express');
-var app = express();
+const bodyParser = require('body-parser');
+const express = require('express');
+const app = express();
  
-var port = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
+
+app.use(express.static('./'));
+app.use(bodyParser.urlencoded({ extended: true}));
+app.use(bodyParser.json());
 
 app.get('/', function (req, res) {
-  res.send('Hello World');
+  res.redirect('../dist/index.html');
 });
  
 app.listen(port, _ => {

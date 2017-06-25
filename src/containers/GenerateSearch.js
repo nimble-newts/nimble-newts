@@ -19,7 +19,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     //map dispatch action to a prop in components
-  }
+  };
 };
 
 /* const GenerateSearch = connect(

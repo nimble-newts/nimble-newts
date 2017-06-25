@@ -3,10 +3,11 @@ var Schema = mongoose.Schema;
 var connection = mongoose.connect(`mongodb://localhost/users`);
 
 var UserSchema = new Schema({
-  default_address: String,
+  userName: String,
+  defaultAddress: String,
   friends: Array,
   suggestions: Array,
-  access_token: String,
+  accessToken: String,
   salt: String
 }); 
 

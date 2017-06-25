@@ -10,7 +10,7 @@ app.use(express.static('./'));
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(bodyParser.json());
 
-app.get(express.static(path.join(__dirname, '/../dist')));
+app.use(express.static(path.join(__dirname, '/../dist')));
 
 app.get('*', function (req, res) {
   res.sendFile(path.resolve(__dirname + '/../dist/index.html'));

@@ -5,4 +5,5 @@ const Suggestions = ({}) => (
     <h1>Saved suggestions</h1>
   </div>
 );
+
 export default Suggestions;

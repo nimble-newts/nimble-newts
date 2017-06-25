@@ -14,5 +14,5 @@ app.get('/', function (req, res) {
 });
  
 app.listen(port, _ => {
-	console.log(`Server connected to port number: ${port}`);
+  console.log(`Server connected to port number: ${port}`);
 });

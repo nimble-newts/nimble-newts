@@ -5,10 +5,12 @@ class Addresses extends Component {
   constructor(props) {
     super(props);
     this.state = { //refactor with redux
-      'number': 1
+       number: 1,
+       address: ''      
     };
 
     this.handleAdd = this.handleAdd.bind(this);
+    this.handleAddressText = this.handleAddressText.bind(this);
   }
 
   handleAdd(e) {
@@ -16,6 +18,13 @@ class Addresses extends Component {
       return { 'number': prevState.number + 1 }
     });
   }
+
+  handleAddressText(e) {
+    this.setState({
+      address: e.target.value
+    });
+  }
+
 
   render() {
     let addresses = [];
@@ -26,6 +35,7 @@ class Addresses extends Component {
     return (
       <div className="Addresses">
         {addresses}
+        <input type="text" onChange={this.handleAddressText}></input>        
         {this.state.number === 4 ? (
             <input type="submit" disabled="disabled" value="Add Address"></input>
           ) : (

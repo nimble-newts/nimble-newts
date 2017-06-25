@@ -7,6 +7,7 @@ class Search extends Component {
     super(props);
 
     this.handleSearch = this.handleSearch.bind(this);
+    this.handleAddress = this.handleAddress.bind(this);
   }
 
   handleNav() {
@@ -17,11 +18,15 @@ class Search extends Component {
     console.log(text);
   }
 
+  handleAddress(text) {
+    console.log(text);
+  }
+
   render() {
     return ( 
       <div className="Search">
         <SearchBar handleSearch={this.handleSearch}/>
-        <Addresses />
+        <Addresses handleAddress={this.handleAddress}/>
         map goes here
         <input type="submit" onClick={this.handleNav} value="Go to profile"></input>
       </div>

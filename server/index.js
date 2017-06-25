@@ -21,7 +21,7 @@ app.get('/test', (req, res) => {
       console.log(docs);
       res.json(docs);
     }
-  })
+  });
 });
 
 app.post('/test', (req, res) => {

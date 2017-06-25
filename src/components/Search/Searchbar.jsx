@@ -9,7 +9,7 @@ class SearchBar extends React.Component {
     };
     
     this.handleSearchText = this.handleSearchText.bind(this);    
-    this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
+    this.handleSearch = this.props.handleSearch;
   }
 
   handleSearchText(event) {
@@ -26,7 +26,7 @@ class SearchBar extends React.Component {
     return (
       <div className = "Search-bar">
         <input type="text" onChange={this.handleSearchText}></input>
-        <input type="submit" value="Search" onClick={this.handleSearchSubmit}></input>
+        <input type="submit" value="Search" onClick={() => this.handleSearch(this.state.searchText)}></input>
       </div>
     );
   }

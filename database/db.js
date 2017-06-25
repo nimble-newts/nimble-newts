@@ -1,8 +1,8 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-var connection = mongoose.connect(`mongodb://localhost/users`);
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+const connection = mongoose.connect(`mongodb://localhost/users`);
 
-var UserSchema = new Schema({
+const UserSchema = new Schema({
   default_address: String,
   friends: Array,
   suggestions: Array,
@@ -10,5 +10,5 @@ var UserSchema = new Schema({
   salt: String
 }); 
 
-var User = mongoose.model('User', UserSchema);
+const User = mongoose.model('User', UserSchema);
 exports.User = User;

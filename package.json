@@ -12,6 +12,7 @@
     "start": "nodemon server",
     "lint": "eslint . --ext .js,.jsx",
     "pretest": "npm run lint",
+    "test": "mocha spec",
     "build": "webpack -d --watch"
   },
   "dependencies": {

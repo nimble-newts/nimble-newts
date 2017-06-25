@@ -1,7 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var port = 27017;
-var connection = mongoose.connect(`mongodb://localhost:${port}/users`);
+var connection = mongoose.connect(`mongodb://localhost/users`);
 
 var UserSchema = new Schema({
   _id: Number,

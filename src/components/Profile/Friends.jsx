@@ -11,10 +11,15 @@ class Friends extends Component {
 
   componentDidMount() {
     FB.api('/me', res => {
-      console.log(res);
+      console.log(res.id);
       fetch('/friends', {
-        body: { 'userID': res.id },
-        headers: { 'Content-Type': 'application/json' } 
+        method: 'post',
+        body: JSON.stringify({ 
+          'userID': res.id 
+        }),
+        headers: { 
+          'Content-Type': 'application/json' 
+        } 
       }).then(res => {
         return res.json();
       }).then(res => {
@@ -27,9 +32,9 @@ class Friends extends Component {
 
   render() {
     let friends = [];
-    this.state.friends.forEach(friend => {
-      friends.push(<Friend name={friend.name} address={friend.address}/>);
-    });
+    for (let i = 0; i < this.state.friends.length; i++) {
+      friends.push(<Friend name={this.state.friends[i].name} address={this.state.friends[i].address} key={i}/>);
+    }
 
     return (
       <div className="Friends">

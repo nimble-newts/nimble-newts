@@ -35,7 +35,7 @@ class Address extends Component {
         }
       }
 
-      fetch('/friends', saveOptions).then(res => {
+      fetch('/save', saveOptions).then(res => {
         this.setState({ 'adding': false });
       });
     });

@@ -37,7 +37,7 @@ app.post('/login', function(req, res) {
   });
 });
 
-app.post('/friends', function(req, res) {
+app.post('/save', function(req, res) {
   let newFriend = {};
   newFriend.name = req.body.name;
   newFriend.address = req.body.address
@@ -53,10 +53,10 @@ app.post('/friends', function(req, res) {
   });
 })
 
-app.get('/friends', function(req, res) {
-  console.log(req.body);
+app.post('/friends', function(req, res) {
   User.findOne({ 'id': req.body.userID }, function(err, person) {
     if (err) { return err; }
+    console.log('friends', person.friends);
     res.send(JSON.stringify(person.friends));
   });
 })

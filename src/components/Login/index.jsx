@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 class Login extends Component {
   constructor(props) {
     super(props);
+
+    this.handleLogin = this.handleLogin.bind(this);
   }
 
   componentWillMount() {
@@ -16,20 +18,24 @@ class Login extends Component {
       });
       FB.AppEvents.logPageView();
       //SDK function calls must be placed here after init
-      FB.getLoginStatus(function(response) {
+      FB.getLoginStatus(function(response) { 
         if (response.status === 'connected') {
-          fetch('/login', {
-            body: {
-              token: response.authResponse.accessToken
+          const respOptions = {
+            method: 'post',
+            body: JSON.stringify({
+              'userID': response.authResponse.userID, 
+              'token': response.authResponse.accessToken
+            }),
+            headers: {
+              'Content-Type': 'application/json'
             }
+          };
+
+          fetch('/login', respOptions).then(function(res) {
+            return res.json();
           }).then(function(res) {
-            return res.text();
-          }).then(function(res) {
-            res = JSON.parse(res);
             document.location.href = res.redirect;
           });
-        } else {
-          
         }
       });
     };
@@ -43,12 +49,34 @@ class Login extends Component {
      }(document, 'script', 'facebook-jssdk'));
   };
 
+  handleLogin() {
+    FB.login(function(response) {
+      if (response.status === 'connected') {
+        const respOptions = {
+          method: 'post',
+          body: JSON.stringify({
+            'userID': response.authResponse.userID, 
+            'token': response.authResponse.accessToken
+          }),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        };
+
+        fetch('/login', respOptions).then(function(res) {
+          return res.json();
+        }).then(function(res) {
+          document.location.href = res.redirect;
+        });
+      }
+    })
+  };
+
   render() {
     return (
       <div className="Welcome">
         <div className="Login-header">APP NAME</div>
-        <div className="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false">
-        </div>
+        <input type="submit" value="Log in" onClick={this.handleLogin}></input>
       </div>
     )
   };

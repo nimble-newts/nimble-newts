@@ -3,12 +3,13 @@ const Schema = mongoose.Schema;
 const connection = mongoose.connect(`mongodb://localhost/users`);
 
 const UserSchema = new Schema({
+  id: String,
+  name: String,
+  photo_url: String,
   default_address: String,
   friends: Array,
   suggestions: Array,
-  access_token: String,
-  salt: String
 }); 
 
 const User = mongoose.model('User', UserSchema);
-exports.User = User;
+module.exports = User;

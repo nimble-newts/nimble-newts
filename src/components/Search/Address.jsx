@@ -20,16 +20,19 @@ class Address extends Component {
   }
 
   handleSave(e) {
-    let saveAddress = e.target.parentNode.children[0].value;
-    let saveName = e.target.parentNode.children[1].value;
+    let saveAddress = e.target.parentNode.parentNode.children[0].value;
+    let saveName = e.target.parentNode.children[0].value;
     FB.api('/me', res => {
       let saveOptions = {
         method: 'post',
         body: JSON.stringify({
           userID: res.id,
           address: saveAddress,
-          friend: saveName
-        })
+          name: saveName
+        }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
       }
 
       fetch('/friend', saveOptions).then(res => {

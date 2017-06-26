@@ -38,8 +38,18 @@ app.post('/login', function(req, res) {
 });
 
 app.post('/friend', function(req, res) {
-  console.log('saving friend: ', req.body.name);
-  res.send();
+  let newFriend = {};
+  newFriend[req.body.name] = req.body.address
+  console.log('saving friend:', newFriend);
+  User.findOne({ 'id': req.body.userID }, function(err, person) {
+    if (err) { return err; }
+    if (person === null) { console.log('error: no user found'); return; }
+    
+    person.friends.push(newFriend);
+    person.save(function(err, updated) {
+      res.send(updated);
+    })
+  });
 })
 
 app.get('*', function (req, res) {

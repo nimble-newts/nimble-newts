@@ -88,26 +88,34 @@ app.get('*', function (req, res) {
   res.sendFile(path.resolve(__dirname + '/../dist/index.html'));
 });
 
-app.post('/yelp/searches', function (req, res) {
-  let options = {
-    url: 'https://api.yelp.com/v3/autocomplete?text=del&latitude=37.786882&longitude=-122.399972',
+app.post('/searches', function (req, res) {
+  var search = req.body.searchText;
+  var address = req.body.address;
+
+  const respOptions = {
+    url: `https://api.yelp.com/v3/businesses/search?term=${search}&location=${address}&radius=4023`,
     method: 'GET',
     headers: {
       'Authorization': `Bearer ${token}`
     }
   };
+  console.log(respOptions);
 
   let body = '';
-  request(options, (err) => {
+  request(respOptions, (err, response, body) => {
     if (err) { throw err; }
-  }).on('data', (data) => {
-    body += data;
-  }).on('end', () => {
     body = JSON.parse(body);
-    res.end(JSON.stringify(body));
-  }).on('err', () => {
-    res.end();
-  });
+    console.log(body);
+    res.send(body);
+  })
+  // .on('data', (data) => {
+  //   body += data;
+  // }).on('end', () => {
+  //   body = JSON.parse(body);
+  //   res.end(JSON.stringify(body));
+  // }).on('err', () => {
+  //   res.end();
+  // });
 });
  
 app.listen(port, _ => {

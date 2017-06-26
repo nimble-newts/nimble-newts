@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Address from './Address.jsx';
 
+<<<<<<< 1756e3ada96052e2e523e0bb35d8ce205a41d5ba
 class Addresses extends Component {
   constructor(props) {
     super(props);
@@ -46,5 +47,13 @@ class Addresses extends Component {
     );
   }
 }
+=======
+const Addresses = ({handleAddress}) => (
+  <div className="Addresses">
+    <input type="text" onChange={handleAddress}></input>
+    <input type="submit" value="Add Address"></input>
+  </div>
+);
+>>>>>>> Add function to take centralize inputed address
 
 export default Addresses;

@@ -31,28 +31,9 @@ class Login extends Component {
 
   componentDidMount() {
     let app = this;
-    window.fbAsyncInit = function() { //run as soon as SDK completes loading
-      FB.init({
-        appId            : '802344973265370',
-        autoLogAppEvents : true,
-        xfbml            : true,
-        version          : 'v2.9',
-        status           : true
-      });
-      FB.AppEvents.logPageView();
-      //SDK function calls must be placed here after init
-      FB.getLoginStatus(function(response) { 
-        app.postLogin(response);
-      });
-    };
-
-    (function(d, s, id){
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) {return;}
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_US/sdk.js";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
+    FB.getLoginStatus(function(response) { 
+      app.postLogin(response);
+    });
   }
 
   handleLogin() {

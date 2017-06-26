@@ -37,6 +37,11 @@ app.post('/login', function(req, res) {
   });
 });
 
+app.post('/friend', function(req, res) {
+  console.log('saving friend: ', req.body.name);
+  res.send();
+})
+
 app.get('*', function (req, res) {
   res.sendFile(path.resolve(__dirname + '/../dist/index.html'));
 });

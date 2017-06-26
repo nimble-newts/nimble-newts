@@ -11,7 +11,7 @@ class Addresses extends Component {
     this.handleAdd = this.handleAdd.bind(this);
   }
 
-  handleAdd() {
+  handleAdd(e) {
     this.setState(prevState => {
       return { 'number': prevState.number + 1 }
     });
@@ -26,7 +26,12 @@ class Addresses extends Component {
     return (
       <div className="Addresses">
         {addresses}
-        <input type="submit" onClick={this.handleAdd} value="Add Address"></input>
+        {this.state.number === 4 ? (
+            <input type="submit" disabled="disabled" value="Add Address"></input>
+          ) : (
+            <input type="submit" onClick={this.handleAdd} value="Add Address"></input>
+          )
+        }
       </div>
     );
   }

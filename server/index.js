@@ -37,9 +37,10 @@ app.post('/login', function(req, res) {
   });
 });
 
-app.post('/friend', function(req, res) {
+app.post('/friends', function(req, res) {
   let newFriend = {};
-  newFriend[req.body.name] = req.body.address
+  newFriend.name = req.body.name;
+  newFriend.address = req.body.address
   console.log('saving friend:', newFriend);
   User.findOne({ 'id': req.body.userID }, function(err, person) {
     if (err) { return err; }
@@ -49,6 +50,14 @@ app.post('/friend', function(req, res) {
     person.save(function(err, updated) {
       res.send(updated);
     })
+  });
+})
+
+app.get('/friends', function(req, res) {
+  console.log(req.body);
+  User.findOne({ 'id': req.body.userID }, function(err, person) {
+    if (err) { return err; }
+    res.send(JSON.stringify(person.friends));
   });
 })
 

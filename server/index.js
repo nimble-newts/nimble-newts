@@ -1,8 +1,10 @@
 var bodyParser = require('body-parser');
 var express = require('express');
 var User = require('../database/db.js');
+var db = require('../database/db');
 var path = require('path');
 var request = require('request');
+var token = require('./token');
 
 var app = express();
 var port = process.env.PORT || 3000;
@@ -84,6 +86,28 @@ app.put('/friends', function(req, res) {
 
 app.get('*', function (req, res) {
   res.sendFile(path.resolve(__dirname + '/../dist/index.html'));
+});
+
+app.post('/yelp/searches', function (req, res) {
+  let options = {
+    url: 'https://api.yelp.com/v3/autocomplete?text=del&latitude=37.786882&longitude=-122.399972',
+    method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  };
+
+  let body = '';
+  request(options, (err) => {
+    if (err) { throw err; }
+  }).on('data', (data) => {
+    body += data;
+  }).on('end', () => {
+    body = JSON.parse(body);
+    res.end(JSON.stringify(body));
+  }).on('err', () => {
+    res.end();
+  });
 });
  
 app.listen(port, _ => {

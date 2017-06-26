@@ -27,7 +27,7 @@ class Login extends Component {
         document.location.href = res.redirect;
       });
     }
-  };
+  }
 
   componentDidMount() {
     let app = this;
@@ -47,20 +47,20 @@ class Login extends Component {
     };
 
     (function(d, s, id){
-       var js, fjs = d.getElementsByTagName(s)[0];
-       if (d.getElementById(id)) {return;}
-       js = d.createElement(s); js.id = id;
-       js.src = "//connect.facebook.net/en_US/sdk.js";
-       fjs.parentNode.insertBefore(js, fjs);
-     }(document, 'script', 'facebook-jssdk'));
-  };
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {return;}
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  }
 
   handleLogin() {
     let app = this;
     FB.login(function(response) {
       app.postLogin(response);
-    })
-  };
+    });
+  }
 
   render() {
     return (
@@ -68,8 +68,8 @@ class Login extends Component {
         <div className="Login-header">APP NAME</div>
         <input type="submit" value="Log in" onClick={this.handleLogin}></input>
       </div>
-    )
-  };
-};
+    );
+  }
+}
 
 export default Login;

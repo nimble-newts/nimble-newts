@@ -17,7 +17,6 @@ app.post('/login', function(req, res) {
   var res = res;
   var userID = req.body.userID;
   var token = req.body.token;
-  console.log(req.body)
   User.findOne({ 'id': userID }, function(err, person) {
     if (err) { return err; }
 
@@ -25,14 +24,14 @@ app.post('/login', function(req, res) {
       request('https://graph.facebook.com/' + userID + '?fields=name,picture&access_token=' + token, function(err, response, body) {
         body = JSON.parse(body);
         console.log('creating new user: ', userID);
-        var user = new User({ 'id': userID, 'photo_url': body.picture.data.url, 'name': body.name })
+        var user = new User({ 'id': userID, 'photo_url': body.picture.data.url, 'name': body.name });
         user.save(function(err, saved) {
           if (err) { return err; }
           res.send({ redirect: '/search' });
-        })
-      })
+        });
+      });
     } else {
-      console.log('already exists!')
+      console.log('already exists!');
       res.send({ redirect: '/search' });
     }
   });

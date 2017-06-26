@@ -4,10 +4,33 @@ class Login extends Component {
   constructor(props) {
     super(props);
 
+    this.postLogin = this.postLogin.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
   }
 
-  componentWillMount() {
+  postLogin(response) {
+    if (response.status === 'connected') {
+      const respOptions = {
+        method: 'post',
+        body: JSON.stringify({
+          'userID': response.authResponse.userID, 
+          'token': response.authResponse.accessToken
+        }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      };
+
+      fetch('/login', respOptions).then(function(res) {
+        return res.json();
+      }).then(function(res) {
+        document.location.href = res.redirect;
+      });
+    }
+  };
+
+  componentDidMount() {
+    let app = this;
     window.fbAsyncInit = function() { //run as soon as SDK completes loading
       FB.init({
         appId            : '802344973265370',
@@ -19,24 +42,7 @@ class Login extends Component {
       FB.AppEvents.logPageView();
       //SDK function calls must be placed here after init
       FB.getLoginStatus(function(response) { 
-        if (response.status === 'connected') {
-          const respOptions = {
-            method: 'post',
-            body: JSON.stringify({
-              'userID': response.authResponse.userID, 
-              'token': response.authResponse.accessToken
-            }),
-            headers: {
-              'Content-Type': 'application/json'
-            }
-          };
-
-          fetch('/login', respOptions).then(function(res) {
-            return res.json();
-          }).then(function(res) {
-            document.location.href = res.redirect;
-          });
-        }
+        app.postLogin(response);
       });
     };
 
@@ -50,25 +56,9 @@ class Login extends Component {
   };
 
   handleLogin() {
+    let app = this;
     FB.login(function(response) {
-      if (response.status === 'connected') {
-        const respOptions = {
-          method: 'post',
-          body: JSON.stringify({
-            'userID': response.authResponse.userID, 
-            'token': response.authResponse.accessToken
-          }),
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        };
-
-        fetch('/login', respOptions).then(function(res) {
-          return res.json();
-        }).then(function(res) {
-          document.location.href = res.redirect;
-        });
-      }
+      app.postLogin(response);
     })
   };
 

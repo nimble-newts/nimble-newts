@@ -8,30 +8,27 @@ class Search extends Component {
 
     this.state = {
       address: '',
-      centralLocation: {
+      centralLocation: {},
+      dummyData: {
         lat: 37.4238253802915,
         lng: -122.0829009197085
       }
     };
 
     this.map;
-    this.marker;
-    this.geocoder;   
+    this.marker = [];
+    this.geocoder;
+    this.deletePastMarkers = this.deletePastMarkers.bind(this);      
     this.handleSearch = this.handleSearch.bind(this);
     this.handleAddress = this.handleAddress.bind(this);
+    this.handleYelpMarker = this.handleYelpMarker.bind(this);
     this.grabYelpData = this.grabYelpData.bind(this);
   }
 
   componentDidMount() {
     this.map = new google.maps.Map(this.refs.map, {
-      zoom: 15,
-      center: this.state.centralLocation
-    });
-
-    this.marker = new google.maps.Marker({
-      map: this.map,
-      animation: google.maps.Animation.DROP,
-      position: this.state.centralLocation
+      zoom: 14,
+      center: this.state.dummyData
     });
 
     this.geocoder = new google.maps.Geocoder();
@@ -42,26 +39,22 @@ class Search extends Component {
   }
 
   handleSearch(text) {
-    this.grabYelpData(text, (rawData) => {
-      rawData.businesses.map((item) => {
-        let position = {
-          lat: item.coordinates.latitude,
-          lng: item.coordinates.longitude
-        };
-        this.marker = new google.maps.Marker({
-          map: this.map,
-          animation: google.maps.Animation.DROP,
-          position: position
-        });
-      });
-    });
+    if (this.marker !== undefined) {
+      this.deletePastMarkers();
+    }
 
-    
+    this.grabYelpData(text, (rawData) => {
+      this.handleYelpMarker(rawData.businesses);
+    });
 
     this.geocoder.geocode({'address': this.state.address}, (results, status) => {
       if (status === google.maps.GeocoderStatus.OK) {
         let location = results[0].geometry.location;
-        this.marker.setPosition(location);
+        this.marker.push(new google.maps.Marker({
+          map: this.map,
+          animation: google.maps.Animation.DROP,
+          position: location
+        }));
         this.map.setCenter(location);
       }
     });
@@ -70,6 +63,20 @@ class Search extends Component {
   handleAddress(event) {
     this.setState({
       address: event.target.value,
+    });
+  }
+
+  handleYelpMarker(rawData) {
+    rawData.map((item) => {
+      let position = {
+        lat: item.coordinates.latitude,
+        lng: item.coordinates.longitude
+      };
+      this.marker.push(new google.maps.Marker({
+        map: this.map,
+        animation: google.maps.Animation.BOUNCE,
+        position: position
+      }));
     });
   }
 
@@ -90,6 +97,12 @@ class Search extends Component {
     }).then((res) => {
       callback(res);
     });    
+  }
+
+  deletePastMarkers() {
+    for (var i = 0; i < this.marker.length; i++) {
+      this.marker[i].setMap(null);
+    }
   }
 
   render() {

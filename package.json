@@ -13,7 +13,8 @@
     "lint": "eslint . --ext .js,.jsx",
     "pretest": "npm run lint",
     "test": "mocha spec",
-    "build": "webpack -d --watch"
+    "build": "webpack -d --watch",
+    "db": "mongod --dbpath=database/data"
   },
   "dependencies": {
     "express": "^4.15.3",

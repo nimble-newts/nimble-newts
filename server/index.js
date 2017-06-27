@@ -1,8 +1,10 @@
 var bodyParser = require('body-parser');
 var express = require('express');
 var User = require('../database/db.js');
+var db = require('../database/db');
 var path = require('path');
 var request = require('request');
+var token = require('./token');
 
 var app = express();
 var port = process.env.PORT || 3000;
@@ -83,6 +85,27 @@ app.put('/friends', function(req, res) {
 
 app.get('*', function (req, res) {
   res.sendFile(path.resolve(__dirname + '/../dist/index.html'));
+});
+
+app.post('/searches', function (req, res) {
+  var search = req.body.searchText;
+  var address = req.body.address;
+
+  var respOptions = {
+    url: `https://api.yelp.com/v3/businesses/search?term=${search}&location=${address}&radius=4023&limit=10`,
+    method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  };
+
+  let body = '';
+  request(respOptions, (err, response, body) => {
+    if (err) { throw err; }
+    body = JSON.parse(body);
+    console.log(body);
+    res.send(body);
+  });
 });
  
 app.listen(port, _ => {

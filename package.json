@@ -43,6 +43,7 @@
     "eslint-plugin-react": "^7.1.0",
     "mocha": "^3.4.2",
     "react-router-dom": "^4.1.1",
+    "request": "^2.81.0",
     "webpack": "^3.0.0"
   }
 }

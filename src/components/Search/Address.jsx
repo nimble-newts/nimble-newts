@@ -3,10 +3,13 @@ import React, { Component } from 'react';
 class Address extends Component {
   constructor(props) {
     super(props);
+
+    this.handleAddress = this.props.handleAddress;
+
     this.state = {
       'adding': false,
       'friendAddress': ''
-    }
+    };
 
     this.handleFriend = this.handleFriend.bind(this);
     this.handleSave = this.handleSave.bind(this);
@@ -33,7 +36,7 @@ class Address extends Component {
         headers: {
           'Content-Type': 'application/json'
         }
-      }
+      };
 
       fetch('/save', saveOptions).then(res => {
         this.setState({ 'adding': false });
@@ -44,15 +47,15 @@ class Address extends Component {
   render() {
     return (
       <div className="Address">
-        <input type="text" defaultValue={this.state.friendAddress}></input>
+        <input type="text" defaultValue={this.state.friendAddress} onChange={(e)=> this.handleAddress(e.target.value)}></input>
         {this.state.adding === false ? (
-            <input type="submit" value="Add Friend" onClick={this.handleFriend}></input>
-          ) : (
-            <div>
-              <input type="text" defaultValue="Enter a name!" required></input>
-              <input type="submit" value="Save" onClick={this.handleSave}></input>
-            </div>
-          )}
+          <input type="submit" value="Add Friend" onClick={this.handleFriend}></input>
+        ) : (
+          <div>
+            <input type="text" defaultValue="Enter a name!" required></input>
+            <input type="submit" value="Save" onClick={this.handleSave}></input>
+          </div>
+        )}
       </div>
     );
   }

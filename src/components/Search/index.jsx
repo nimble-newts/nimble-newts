@@ -8,7 +8,8 @@ class Search extends Component {
 
     this.state = {
       address: '',
-      centralLocation: {},
+      addresses: [],
+      centralAddress: '',
       dummyData: {
         lat: 37.4238253802915,
         lng: -122.0829009197085
@@ -21,6 +22,8 @@ class Search extends Component {
     this.deletePastMarkers = this.deletePastMarkers.bind(this);      
     this.handleSearch = this.handleSearch.bind(this);
     this.handleAddress = this.handleAddress.bind(this);
+    this.handleAddAddress = this.handleAddAddress.bind(this);
+    this.handleCentralAddress = this.handleCentralAddress.bind(this);
     this.handleYelpMarker = this.handleYelpMarker.bind(this);
     this.grabYelpData = this.grabYelpData.bind(this);
   }
@@ -32,6 +35,8 @@ class Search extends Component {
     });
 
     this.geocoder = new google.maps.Geocoder();
+
+    this.handleCentralAddress();
   }
 
   handleNav() {
@@ -43,26 +48,41 @@ class Search extends Component {
       this.deletePastMarkers();
     }
 
+
     this.grabYelpData(text, (rawData) => {
       this.handleYelpMarker(rawData.businesses);
     });
 
-    this.geocoder.geocode({'address': this.state.address}, (results, status) => {
+    this.geocoder.geocode({'address': this.state.centralAddress}, (results, status) => {
       if (status === google.maps.GeocoderStatus.OK) {
         let location = results[0].geometry.location;
+        console.log(location);
+        this.map.setCenter(location);
         this.marker.push(new google.maps.Marker({
           map: this.map,
           animation: google.maps.Animation.DROP,
           position: location
         }));
-        this.map.setCenter(location);
       }
     });
   }
 
-  handleAddress(event) {
+  handleAddress(e) {
     this.setState({
-      address: event.target.value,
+      address: e
+    });
+  }
+
+  handleAddAddress() {
+    this.state.addresses.push(this.state.address);
+  }
+
+  handleCentralAddress() {
+    //TODO: With this.state.addresses (an array), map through the addresses 
+    // Grab central point
+    // Set state of centralLocation to the central place
+    this.setState({
+      centralAddress: '944 Market Street San Francisco'
     });
   }
 
@@ -85,7 +105,7 @@ class Search extends Component {
       method: 'POST',
       body: JSON.stringify({
         'searchText': text,
-        'address': this.state.address
+        'address': this.state.centralAddress
       }),
       headers: {
         'Content-Type': 'application/json'
@@ -112,7 +132,7 @@ class Search extends Component {
       <div className="Search">
         <input type="submit" onClick={this.handleNav} value="Go to profile"></input>        
         <SearchBar handleSearch={this.handleSearch}/>
-        <Addresses handleAddress={this.handleAddress}/>
+        <Addresses handleAddress={this.handleAddress} handleAddAddress={this.handleAddAddress}/>
         <div ref='map' style={style}></div>
       </div>
     );

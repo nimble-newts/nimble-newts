@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import Address from './Address.jsx';
 
-<<<<<<< 1756e3ada96052e2e523e0bb35d8ce205a41d5ba
 class Addresses extends Component {
   constructor(props) {
     super(props);
     this.state = { //refactor with redux
-       number: 1,
-       address: ''      
+      number: 1,
+      address: ''      
     };
 
     this.handleAdd = this.handleAdd.bind(this);
@@ -16,7 +15,7 @@ class Addresses extends Component {
 
   handleAdd(e) {
     this.setState(prevState => {
-      return { 'number': prevState.number + 1 }
+      return { 'number': prevState.number + 1 };
     });
   }
 
@@ -36,24 +35,15 @@ class Addresses extends Component {
     return (
       <div className="Addresses">
         {addresses}
-        <input type="text" onChange={this.handleAddressText}></input>        
+        <input type="text" onChange={this.handleAddressText} placeholder='Input address'></input>        
         {this.state.number === 4 ? (
-            <input type="submit" disabled="disabled" value="Add Address"></input>
-          ) : (
-            <input type="submit" onClick={this.handleAdd} value="Add Address"></input>
-          )
-        }
+          <input type="submit" disabled="disabled" value="Add Address"></input>
+        ) : (
+          <input type="submit" onClick={this.handleAdd} value="Add Address"></input>
+        )}
       </div>
     );
   }
 }
-=======
-const Addresses = ({handleAddress}) => (
-  <div className="Addresses">
-    <input type="text" onChange={handleAddress} placeholder='Input address'></input>
-    <input type="submit" value="Add Address"></input>
-  </div>
-);
->>>>>>> Add function to take centralize inputed address
 
 export default Addresses;

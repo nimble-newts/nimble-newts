@@ -3,22 +3,31 @@ import React, { Component } from 'react';
 class Address extends Component {
   constructor(props) {
     super(props);
-
-    this.handleAddress = this.props.handleAddress;
-
     this.state = {
-      'adding': false,
-      'friendAddress': ''
+      adding: false,
+      address: ''
     };
 
-    this.handleFriend = this.handleFriend.bind(this);
+    this.handleAdd = this.handleAdd.bind(this);
+    this.handleCancelAdd = this.handleCancelAdd.bind(this);
     this.handleSave = this.handleSave.bind(this);
   }
 
-  handleFriend(e) {
+  componentWillReceiveProps(newProps) {
+    let address = newProps.address === undefined ? this.state.address : newProps.address;
+    this.setState({ address: address });
+  }
+
+  handleAdd(e) {
     this.setState({
-      'adding': true,
-      'friend_address': e.target.parentNode.children[0].value
+      adding: true,
+      address: e.target.parentNode.children[0].value
+    });
+  }
+
+  handleCancelAdd(e) {
+    this.setState({
+      adding: false
     });
   }
 
@@ -39,7 +48,7 @@ class Address extends Component {
       };
 
       fetch('/save', saveOptions).then(res => {
-        this.setState({ 'adding': false });
+        this.setState({ adding: false });
       });
     });
   }
@@ -47,14 +56,20 @@ class Address extends Component {
   render() {
     return (
       <div className="Address">
-        <input type="text" defaultValue={this.state.friendAddress} onChange={(e)=> this.handleAddress(e.target.value)}></input>
+        <input type="text" value={this.state.address} onChange={(e) => this.setState({ address: e.target.value })} required></input>
         {this.state.adding === false ? (
-          <input type="submit" value="Add Friend" onClick={this.handleFriend}></input>
+          <input type="submit" value="Add Friend" onClick={this.handleAdd}></input>
         ) : (
           <div>
-            <input type="text" defaultValue="Enter a name!" required></input>
+            <input type="text" placeholder="Enter a name!" required></input>
             <input type="submit" value="Save" onClick={this.handleSave}></input>
+            <input type="submit" value="Cancel" onClick={this.handleCancelAdd}></input>
           </div>
+        )}
+        {this.props.addressNumber > 2 ? (
+          <input type="submit" value="x" onClick={this.props.onDelete}></input>
+        ) : (
+          ''
         )}
       </div>
     );

@@ -4,36 +4,49 @@ import Address from './Address.jsx';
 class Addresses extends Component {
   constructor(props) {
     super(props);
-
-    this.handleAddress = this.props.handleAddress;
-    this.handleAddAddress = this.props.handleAddAddress;
-
     this.state = { 
-      number: 1,
-      address: ''      
+      number: 2,
+      addresses: []      
     };
 
+    this.handleDelete = this.handleDelete.bind(this);
     this.handleAdd = this.handleAdd.bind(this);
   }
 
   handleAdd(e) {
     this.setState(prevState => {
-      return { 'number': prevState.number + 1 };
+      return { number: prevState.number + 1 };
     });
-    
-    this.handleAddAddress();
+  }
+
+  handleDelete(e) {
+    let currentAddresses = [];
+    let deleteValue = e.target.parentNode.children[0].value;
+    let children = e.target.parentNode.parentNode.children;
+    for (let i = 0; i < children.length - 1; i++) {
+      let childValue = children[i].children[0].value;
+      if (childValue !== deleteValue) { currentAddresses.push(childValue); }
+    }
+
+    this.setState(prevState => {
+      return { 
+        number: prevState.number - 1,
+        addresses: currentAddresses
+      };
+    });
   }
 
   render() {
     let addresses = [];
     for (let i = 0; i < this.state.number; i++) {
-      addresses.push(<Address key={i} handleAddress={this.handleAddress}/>);
+      let address = this.state.addresses[i];
+      addresses.push(<Address addressNumber={this.state.number} address={address} onDelete={this.handleDelete} key={i} />);
     }
 
     return (
       <div className="Addresses">
         {addresses}
-        {this.state.number === 4 ? (
+        {this.state.number === 5 ? (
           <input type="submit" disabled="disabled" value="Add Address" ></input>
         ) : (
           <input type="submit" onClick={this.handleAdd} value="Add Address"></input>

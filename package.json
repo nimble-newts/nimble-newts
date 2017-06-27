@@ -9,12 +9,14 @@
   },
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server",
+    "build": "webpack -d --watch", 
+    "db": "mongod --dbpath=database/data",
+    "heroku-postbuild": "npm run webpack:deploy",
     "lint": "eslint . --ext .js,.jsx",
     "pretest": "npm run lint",
+    "start": "nodemon server",
     "test": "mocha spec",
-    "build": "webpack -d --watch",
-    "db": "mongod --dbpath=database/data"
+    "webpack:deploy": "webpack --config=webpack.config.js -p"
   },
   "dependencies": {
     "body-parser": "^1.17.2",

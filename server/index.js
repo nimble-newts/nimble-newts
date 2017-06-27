@@ -1,14 +1,13 @@
 var bodyParser = require('body-parser');
 var express = require('express');
 var User = require('../database/db.js');
-var db = require('../database/db');
 var path = require('path');
 var request = require('request');
-var token = require('./token');
 
 var app = express();
 var port = process.env.PORT || 3000;
 
+app.use(express.static('./'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -21,7 +20,7 @@ app.post('/login', function(req, res) {
   User.findOne({ 'id': userID }, function(err, person) {
     if (err) { return err; }
 
-    if (person === null) { 
+    if (person === null) {
       request('https://graph.facebook.com/' + userID + '?fields=name,picture&access_token=' + token, function(err, response, body) {
         body = JSON.parse(body);
         console.log('creating new user: ', userID);
@@ -39,7 +38,7 @@ app.post('/login', function(req, res) {
 });
 
 app.post('/save', function(req, res) {
-  let newFriend = {};
+  var newFriend = {};
   newFriend.name = req.body.name;
   newFriend.address = req.body.address;
   console.log('saving friend:', newFriend);
@@ -49,7 +48,21 @@ app.post('/save', function(req, res) {
     
     person.friends.push(newFriend);
     person.save(function(err, updated) {
-      res.send(updated);
+      res.send(updated.friends);
+    });
+  });
+});
+
+app.post('/default', function(req, res) {
+  var defaultAddress = req.body.defaultAddress;
+  console.log('saving default address:', defaultAddress);
+  User.findOne({ 'id': req.body.userID }, function(err, person) {
+    if (err) { return err; }
+    if (person === null) { console.log('error: no user found'); return; }
+    
+    person.default_address = defaultAddress;
+    person.save(function(err, updated) {
+      res.send(updated.default_address);
     });
   });
 });
@@ -75,9 +88,7 @@ app.put('/friends', function(req, res) {
       }
       index++;
     }
-    console.log(person.friends);
     person.save(function(err, saved) {
-      console.log(saved, 'saved');
       res.send(person.friends);
     });
   });
@@ -85,27 +96,6 @@ app.put('/friends', function(req, res) {
 
 app.get('*', function (req, res) {
   res.sendFile(path.resolve(__dirname + '/../dist/index.html'));
-});
-
-app.post('/searches', function (req, res) {
-  var search = req.body.searchText;
-  var address = req.body.address;
-
-  var respOptions = {
-    url: `https://api.yelp.com/v3/businesses/search?term=${search}&location=${address}&radius=4023&limit=10`,
-    method: 'GET',
-    headers: {
-      'Authorization': `Bearer ${token}`
-    }
-  };
-
-  let body = '';
-  request(respOptions, (err, response, body) => {
-    if (err) { throw err; }
-    body = JSON.parse(body);
-    console.log(body);
-    res.send(body);
-  });
 });
  
 app.listen(port, _ => {

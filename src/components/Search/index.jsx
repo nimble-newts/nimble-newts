@@ -56,7 +56,6 @@ class Search extends Component {
     this.geocoder.geocode({'address': this.state.centralAddress}, (results, status) => {
       if (status === google.maps.GeocoderStatus.OK) {
         let location = results[0].geometry.location;
-        console.log(location);
         this.map.setCenter(location);
         this.marker.push(new google.maps.Marker({
           map: this.map,
@@ -87,7 +86,7 @@ class Search extends Component {
   }
 
   handleYelpMarker(rawData) {
-    rawData.map((item) => {
+    rawData.map((item, index) => {
       let position = {
         lat: item.coordinates.latitude,
         lng: item.coordinates.longitude
@@ -97,6 +96,22 @@ class Search extends Component {
         animation: google.maps.Animation.BOUNCE,
         position: position
       }));
+
+
+      let content = 
+        '<div>' +
+        '<h3>' + item.name + '</h3>' +
+        '<div>' + item.url + '</div>' +
+        '<div>' + item.location.address1 + '</div>' +
+        '</div>';
+
+      let infoWindow = new google.maps.InfoWindow({
+        content: content
+      });
+
+      this.marker[index].addListener('click', () => {
+        infoWindow.open(this.map, this.marker[index]);
+      });
     });
   }
 

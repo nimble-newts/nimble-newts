@@ -37,6 +37,30 @@ app.post('/login', function(req, res) {
   });
 });
 
+app.post('/save', function(req, res) {
+  let newFriend = {};
+  newFriend.name = req.body.name;
+  newFriend.address = req.body.address
+  console.log('saving friend:', newFriend);
+  User.findOne({ 'id': req.body.userID }, function(err, person) {
+    if (err) { return err; }
+    if (person === null) { console.log('error: no user found'); return; }
+    
+    person.friends.push(newFriend);
+    person.save(function(err, updated) {
+      res.send(updated);
+    })
+  });
+})
+
+app.post('/friends', function(req, res) {
+  User.findOne({ 'id': req.body.userID }, function(err, person) {
+    if (err) { return err; }
+    console.log('friends', person.friends);
+    res.send(JSON.stringify(person.friends));
+  });
+})
+
 app.get('*', function (req, res) {
   res.sendFile(path.resolve(__dirname + '/../dist/index.html'));
 });

@@ -1,9 +1,10 @@
 import React from 'react';
 
-const Friend = ({ name, address }) => (
+const Friend = ({ name, address, onDelete }) => (
   <div className="Friend">
-    <div>Name: {name}</div>
-    <div>Address: {address}</div>
+    <div className="Friend-name">{name}</div>
+    <div className="Friend-address">{address}</div>
+    <input type="submit" value="Delete" onClick={onDelete}></input>
   </div>
 );
 

@@ -5,8 +5,8 @@ const connection = mongoose.connect(process.env.MONGODB_URI || `mongodb://localh
 const UserSchema = new Schema({
   id: String,
   name: String,
-  photo_url: String,
-  default_address: String,
+  photoUrl: String,
+  defaultAddress: String,
   friends: Array,
   suggestions: Array,
 }); 

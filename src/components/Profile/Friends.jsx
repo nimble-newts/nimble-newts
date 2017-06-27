@@ -41,7 +41,7 @@ class Friends extends Component {
     });
   }
 
-  handleCancelAdd(e){
+  handleCancelAdd(e) {
     this.setState({
       adding: false,
     });
@@ -61,7 +61,7 @@ class Friends extends Component {
         headers: {
           'Content-Type': 'application/json'
         }
-      }
+      };
 
       fetch('/save', saveOptions).then(res => {
         return res.json();
@@ -106,7 +106,7 @@ class Friends extends Component {
     return (
       <div className="Friends">
         <h1>Saved friends</h1>
-       {this.state.adding === false ? (
+        {this.state.adding === false ? (
           <input type="submit" value="Add Friend" onClick={this.handleAdd}></input>
         ) : (
           <div>
@@ -120,6 +120,6 @@ class Friends extends Component {
       </div>
     );
   }
-};
+}
 
 export default Friends;

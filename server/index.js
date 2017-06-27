@@ -24,7 +24,7 @@ app.post('/login', function(req, res) {
       request('https://graph.facebook.com/' + userID + '?fields=name,picture&access_token=' + token, function(err, response, body) {
         body = JSON.parse(body);
         console.log('creating new user: ', userID);
-        var user = new User({ 'id': userID, 'photo_url': body.picture.data.url, 'name': body.name });
+        var user = new User({ 'id': userID, 'photoUrl': body.picture.data.url, 'name': body.name });
         user.save(function(err, saved) {
           if (err) { return err; }
           res.send({ redirect: '/search' });
@@ -60,9 +60,9 @@ app.post('/default', function(req, res) {
     if (err) { return err; }
     if (person === null) { console.log('error: no user found'); return; }
     
-    person.default_address = defaultAddress;
+    person.defaultAddress = defaultAddress;
     person.save(function(err, updated) {
-      res.send(updated.default_address);
+      res.send(updated.defaultAddress);
     });
   });
 });

@@ -28,9 +28,9 @@ class User extends Component {
       }).then(res => {
         return res.json();
       }).then(res => {
-        let defaultAddress = res.default_address || 'none';
+        let defaultAddress = res.defaultAddress || 'none';
         this.setState({
-          photo: res.photo_url,
+          photo: res.photoUrl,
           name: res.name,
           defaultAddress: defaultAddress,
         });
@@ -44,7 +44,7 @@ class User extends Component {
     });
   }
 
-  handleCancelAdd(e){
+  handleCancelAdd(e) {
     this.setState({
       adding: false,
     });
@@ -52,7 +52,6 @@ class User extends Component {
 
   handleSave(e) {
     let defaultAddress = e.target.parentNode.children[1].value;
-    console.log(defaultAddress)
     FB.api('/me', res => {
       let saveOptions = {
         method: 'post',
@@ -63,7 +62,7 @@ class User extends Component {
         headers: {
           'Content-Type': 'application/json'
         }
-      }
+      };
 
       fetch('/default', saveOptions).then(res => {
         return res.text();

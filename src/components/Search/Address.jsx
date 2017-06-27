@@ -54,12 +54,11 @@ class Address extends Component {
   }
 
   render() {
-    console.log(this.state.address, 'address!');
     return (
       <div className="Address">
         <input type="text" value={this.state.address} onChange={(e) => this.setState({ address: e.target.value })} required></input>
         {this.state.adding === false ? (
-            <input type="submit" value="Add Friend" onClick={this.handleAdd}></input>
+          <input type="submit" value="Add Friend" onClick={this.handleAdd}></input>
         ) : (
           <div>
             <input type="text" placeholder="Enter a name!" required></input>

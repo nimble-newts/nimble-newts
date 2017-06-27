@@ -7,18 +7,25 @@ class Address extends Component {
     this.handleAddress = this.props.handleAddress;
 
     this.state = {
-      'adding': false,
-      'friendAddress': ''
+      adding: false,
+      friendAddress: ''
     };
 
-    this.handleFriend = this.handleFriend.bind(this);
+    this.handleAdd = this.handleAdd.bind(this);
+    this.handleCancelAdd = this.handleCancelAdd.bind(this);
     this.handleSave = this.handleSave.bind(this);
   }
 
-  handleFriend(e) {
+  handleAdd(e) {
     this.setState({
-      'adding': true,
-      'friend_address': e.target.parentNode.children[0].value
+      adding: true,
+      friendAddress: e.target.parentNode.children[0].value
+    });
+  }
+
+  handleCancelAdd(e) {
+    this.setState({
+      adding: false
     });
   }
 
@@ -39,7 +46,7 @@ class Address extends Component {
       };
 
       fetch('/save', saveOptions).then(res => {
-        this.setState({ 'adding': false });
+        this.setState({ adding: false });
       });
     });
   }
@@ -49,11 +56,12 @@ class Address extends Component {
       <div className="Address">
         <input type="text" defaultValue={this.state.friendAddress} onChange={(e)=> this.handleAddress(e.target.value)}></input>
         {this.state.adding === false ? (
-          <input type="submit" value="Add Friend" onClick={this.handleFriend}></input>
+          <input type="submit" value="Add Friend" onClick={this.handleAdd}></input>
         ) : (
           <div>
             <input type="text" defaultValue="Enter a name!" required></input>
             <input type="submit" value="Save" onClick={this.handleSave}></input>
+            <input type="submit" value="Cancel" onClick={this.handleCancelAdd}></input>
           </div>
         )}
       </div>

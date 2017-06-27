@@ -1,14 +1,13 @@
 var bodyParser = require('body-parser');
 var express = require('express');
 var User = require('../database/db.js');
-var db = require('../database/db');
 var path = require('path');
 var request = require('request');
-var token = require('./token');
 
 var app = express();
 var port = process.env.PORT || 3000;
 
+app.use(express.static('./'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -21,11 +20,11 @@ app.post('/login', function(req, res) {
   User.findOne({ 'id': userID }, function(err, person) {
     if (err) { return err; }
 
-    if (person === null) { 
+    if (person === null) {
       request('https://graph.facebook.com/' + userID + '?fields=name,picture&access_token=' + token, function(err, response, body) {
         body = JSON.parse(body);
         console.log('creating new user: ', userID);
-        var user = new User({ 'id': userID, 'photo_url': body.picture.data.url, 'name': body.name });
+        var user = new User({ 'id': userID, 'photoUrl': body.picture.data.url, 'name': body.name });
         user.save(function(err, saved) {
           if (err) { return err; }
           res.send({ redirect: '/search' });
@@ -39,7 +38,7 @@ app.post('/login', function(req, res) {
 });
 
 app.post('/save', function(req, res) {
-  let newFriend = {};
+  var newFriend = {};
   newFriend.name = req.body.name;
   newFriend.address = req.body.address;
   console.log('saving friend:', newFriend);
@@ -49,7 +48,21 @@ app.post('/save', function(req, res) {
     
     person.friends.push(newFriend);
     person.save(function(err, updated) {
-      res.send(updated);
+      res.send(updated.friends);
+    });
+  });
+});
+
+app.post('/default', function(req, res) {
+  var defaultAddress = req.body.defaultAddress;
+  console.log('saving default address:', defaultAddress);
+  User.findOne({ 'id': req.body.userID }, function(err, person) {
+    if (err) { return err; }
+    if (person === null) { console.log('error: no user found'); return; }
+    
+    person.defaultAddress = defaultAddress;
+    person.save(function(err, updated) {
+      res.send(updated.defaultAddress);
     });
   });
 });
@@ -75,9 +88,7 @@ app.put('/friends', function(req, res) {
       }
       index++;
     }
-    console.log(person.friends);
     person.save(function(err, saved) {
-      console.log(saved, 'saved');
       res.send(person.friends);
     });
   });

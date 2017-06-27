@@ -34,7 +34,7 @@ app.post('/searches', function (req, res) {
   request(respOptions, (err, response, body) => {
     if (err) { throw err; }
     body = JSON.parse(body);
-        console.log(body);
+    console.log(body);
     res.send(body);
   });
   // .on('data', (data) => {

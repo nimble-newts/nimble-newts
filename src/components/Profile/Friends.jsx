@@ -13,6 +13,6 @@ const Friends = ({ friends, onDelete }) => {
       {friendsArr}
     </div>
   );
-}
+};
 
 export default Friends;

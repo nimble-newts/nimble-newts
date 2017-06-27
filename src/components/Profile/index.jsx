@@ -11,7 +11,7 @@ class Profile extends Component {
       name: '',
       defaultAddress: '',
       friends: []
-    }
+    };
 
     this.handleDelete = this.handleDelete.bind(this);
   }
@@ -34,7 +34,7 @@ class Profile extends Component {
           name: res.name,
           defaultAddress: res.default_address,
           friends: res.friends
-        })
+        });
       });
     });
   }
@@ -63,7 +63,7 @@ class Profile extends Component {
         return res.json();
       }).then(res => {
         this.setState({ friends: res });
-      })
+      });
     });
   }
 

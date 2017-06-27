@@ -40,7 +40,7 @@ app.post('/login', function(req, res) {
 app.post('/save', function(req, res) {
   let newFriend = {};
   newFriend.name = req.body.name;
-  newFriend.address = req.body.address
+  newFriend.address = req.body.address;
   console.log('saving friend:', newFriend);
   User.findOne({ 'id': req.body.userID }, function(err, person) {
     if (err) { return err; }
@@ -49,7 +49,7 @@ app.post('/save', function(req, res) {
     person.friends.push(newFriend);
     person.save(function(err, updated) {
       res.send(updated);
-    })
+    });
   });
 });
 
@@ -61,16 +61,13 @@ app.post('/profile', function(req, res) {
 });
 
 app.put('/friends', function(req, res) {
-  console.log('deleting!')
   let targetName = req.body.name;
   let targetAddress = req.body.address;
   User.findOne({ 'id': req.body.userID }, function(err, person) {
     if (err) { return err; }
-    console.log('in the loop');
     let deleted = false;
     let index = 0;
     while (!deleted) {
-      console.log(person.friends[index])
       if (person.friends[index].name === targetName && person.friends[index].address === targetAddress) {
         person.friends.splice(index, 1);
         deleted = true;
@@ -81,9 +78,9 @@ app.put('/friends', function(req, res) {
     person.save(function(err, saved) {
       console.log(saved, 'saved');
       res.send(person.friends);
-    })
+    });
   });
-})
+});
 
 app.get('*', function (req, res) {
   res.sendFile(path.resolve(__dirname + '/../dist/index.html'));

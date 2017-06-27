@@ -1,10 +1,8 @@
 import React from 'react';
 
-class SearchBar extends React.Component {
+class SearchBar extends Component {
   constructor(props) {
     super(props);
-
-    this.handleSearch = this.props.handleSearch;
 
     this.state = {
       searchText: ''
@@ -13,9 +11,9 @@ class SearchBar extends React.Component {
     this.handleSearchText = this.handleSearchText.bind(this);    
   }
 
-  handleSearchText(event) {
+  handleSearchText(e) {
     this.setState({
-      searchText: event.target.value
+      searchText: e.target.value
     });
   }
 

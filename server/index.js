@@ -7,7 +7,6 @@ var request = require('request');
 var app = express();
 var port = process.env.PORT || 3000;
 
-app.use(express.static('./'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -20,7 +19,7 @@ app.post('/login', function(req, res) {
   User.findOne({ 'id': userID }, function(err, person) {
     if (err) { return err; }
 
-    if (person === null) {
+    if (person === null) { 
       request('https://graph.facebook.com/' + userID + '?fields=name,picture&access_token=' + token, function(err, response, body) {
         body = JSON.parse(body);
         console.log('creating new user: ', userID);

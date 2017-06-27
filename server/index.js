@@ -53,11 +53,10 @@ app.post('/save', function(req, res) {
   });
 })
 
-app.post('/friends', function(req, res) {
+app.post('/profile', function(req, res) {
   User.findOne({ 'id': req.body.userID }, function(err, person) {
     if (err) { return err; }
-    console.log('friends', person.friends);
-    res.send(JSON.stringify(person.friends));
+    res.send(JSON.stringify(person));
   });
 })
 

@@ -67,8 +67,8 @@ class Friends extends Component {
         return res.json();
       }).then(res => {
         this.setState({ 
-          'adding': false,
-          'friends': res
+          adding: false,
+          friends: res
         });
       });
     });

@@ -28,7 +28,6 @@ class Addresses extends Component {
       if (childValue !== deleteValue) { currentAddresses.push(childValue); }
     }
 
-    console.log(currentAddresses);
     this.setState(prevState => {
       return { 
         number: prevState.number - 1,

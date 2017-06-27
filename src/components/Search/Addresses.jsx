@@ -50,7 +50,7 @@ class Addresses extends Component {
 =======
 const Addresses = ({handleAddress}) => (
   <div className="Addresses">
-    <input type="text" onChange={handleAddress}></input>
+    <input type="text" onChange={handleAddress} placeholder='Input address'></input>
     <input type="submit" value="Add Address"></input>
   </div>
 );

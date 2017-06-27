@@ -93,13 +93,12 @@ app.post('/searches', function (req, res) {
   var address = req.body.address;
 
   const respOptions = {
-    url: `https://api.yelp.com/v3/businesses/search?term=${search}&location=${address}&radius=4023`,
+    url: `https://api.yelp.com/v3/businesses/search?term=${search}&location=${address}&radius=4023&limit=10`,
     method: 'GET',
     headers: {
       'Authorization': `Bearer ${token}`
     }
   };
-  console.log(respOptions);
 
   let body = '';
   request(respOptions, (err, response, body) => {
@@ -107,7 +106,7 @@ app.post('/searches', function (req, res) {
     body = JSON.parse(body);
     console.log(body);
     res.send(body);
-  })
+  });
   // .on('data', (data) => {
   //   body += data;
   // }).on('end', () => {

@@ -33,7 +33,7 @@ class Addresses extends Component {
     return (
       <div className="Addresses">
         {addresses}
-        {this.state.number === 4 ? (
+        {this.state.number === 5 ? (
           <input type="submit" disabled="disabled" value="Add Address" ></input>
         ) : (
           <input type="submit" onClick={this.handleAdd} value="Add Address"></input>

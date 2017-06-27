@@ -4,7 +4,6 @@ var User = require('../database/db.js');
 var path = require('path');
 var request = require('request');
 var token = process.env.YELP_ACCESS_TOKEN;
-console.log('Uh oh, heres your token: ', token);
 
 var app = express();
 var port = process.env.PORT || 3000;
@@ -116,7 +115,6 @@ app.post('/searches', function (req, res) {
   request(respOptions, (err, response, body) => {
     if (err) { throw err; }
     body = JSON.parse(body);
-    console.log(body);
     res.send(body);
   });
 });

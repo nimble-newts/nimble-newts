@@ -3,6 +3,8 @@ var express = require('express');
 var User = require('../database/db.js');
 var path = require('path');
 var request = require('request');
+var token = process.env.YELP_ACCESS_TOKEN;
+console.log('Uh oh, heres your token: ', token);
 
 var app = express();
 var port = process.env.PORT || 3000;

@@ -11,6 +11,7 @@ class Addresses extends Component {
 
     this.handleDelete = this.handleDelete.bind(this);
     this.handleAdd = this.handleAdd.bind(this);
+    this.addAddressToList = props.addAddressToList; 
   }
 
   componentDidMount() {
@@ -72,7 +73,7 @@ class Addresses extends Component {
     let addresses = [];
     for (let i = 0; i < this.state.number; i++) {
       let address = this.state.addresses[i];
-      addresses.push(<Address addressNumber={this.state.number} address={address} onDelete={this.handleDelete} key={i} />);
+      addresses.push(<Address addressNumber={this.state.number} addAddressToList={this.addAddressToList} address={address} onDelete={this.handleDelete} key={i} />);
     }
 
     return (

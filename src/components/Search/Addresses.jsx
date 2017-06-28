@@ -13,6 +13,24 @@ class Addresses extends Component {
     this.handleAdd = this.handleAdd.bind(this);
   }
 
+  componentDidMount() {
+    let app = this;
+    FB.api('/me', res => {
+      fetch('/default', {
+        method: 'post',
+        body: JSON.stringify({ 
+          userID: res.id,
+          get: true 
+        }),
+        headers: { 'Content-Type': 'application/json'}
+      }).then(res => {
+        return res.text();
+      }).then(res => {
+        app.setState({ addresses: [res] });
+      });
+    });
+  }
+
   handleAdd(e) {
     let currentAddresses = [];
     let children = e.target.parentNode.children;

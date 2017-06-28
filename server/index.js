@@ -56,15 +56,22 @@ app.post('/save', function(req, res) {
 
 app.post('/default', function(req, res) {
   var defaultAddress = req.body.defaultAddress;
-  console.log('saving default address:', defaultAddress);
+  var get = req.body.get;
   User.findOne({ 'id': req.body.userID }, function(err, person) {
     if (err) { return err; }
     if (person === null) { console.log('error: no user found'); return; }
-    
-    person.defaultAddress = defaultAddress;
-    person.save(function(err, updated) {
-      res.send(updated.defaultAddress);
-    });
+
+    if (get === true) {
+      console.log('returning info!'); 
+      var sendDefault = person.defaultAddress || '';
+      res.send(sendDefault); 
+    } else {  
+      console.log('saving default address:', defaultAddress);
+      person.defaultAddress = defaultAddress;
+      person.save(function(err, updated) {
+        res.send(updated.defaultAddress);
+      });
+    }
   });
 });
 

@@ -20,7 +20,7 @@ class User extends Component {
       fetch('/profile', {
         method: 'post',
         body: JSON.stringify({ 
-          'userID': res.id 
+          'userID': res.id
         }),
         headers: { 
           'Content-Type': 'application/json' 
@@ -57,7 +57,8 @@ class User extends Component {
         method: 'post',
         body: JSON.stringify({
           userID: res.id,
-          defaultAddress: defaultAddress
+          defaultAddress: defaultAddress,
+          get: false
         }),
         headers: {
           'Content-Type': 'application/json'

@@ -8,7 +8,7 @@ class Address extends Component {
       adding: false,
       address: ''
     };
-
+    this.addAddressToList = this.props.addAddressToList;
     this.friendsSource = [];
     this.handleAdd = this.handleAdd.bind(this);
     this.handleCancelAdd = this.handleCancelAdd.bind(this);
@@ -93,6 +93,7 @@ class Address extends Component {
   }
 
   handleChange(e) {
+    console.log(`Handle change: ${e.target.value}`);
     const el = findDOMNode(this.refs.address);
     $(el).autocomplete({
       source: this.friendsSource
@@ -103,7 +104,11 @@ class Address extends Component {
   render() {
     return (
       <div className="Address">
-        <input type="text" value={this.state.address} onChange={this.handleChange} ref="address" required></input>
+        <input type="text" onBlur={ e => {
+          this.handleChange(e);
+          this.addAddressToList(e.target.value);
+        }
+        } ref="address" required></input>
         {this.state.adding === false ? (
           <input type="submit" value="Add Friend" onClick={this.handleAdd}></input>
         ) : (

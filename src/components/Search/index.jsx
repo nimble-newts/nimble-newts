@@ -4,12 +4,15 @@ import Promise from 'bluebird';
 import SearchBar from './Searchbar.jsx';
 import Addresses from './Addresses.jsx';
 import { handleSave } from './helpers/save.js';
+import Promise from 'bluebird';
 
 class Search extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      addresses: [],
+      centralAddress: '',
       dummyData: {
         lat: 37.4238253802915,
         lng: -122.0829009197085
@@ -27,6 +30,7 @@ class Search extends Component {
     this.handleCentralAddress = this.handleCentralAddress.bind(this);
     this.handleYelpMarker = this.handleYelpMarker.bind(this);
     this.grabYelpData = this.grabYelpData.bind(this);
+    this.addAddressToList = this.addAddressToList.bind(this);
   }
 
   componentDidMount() {
@@ -36,6 +40,8 @@ class Search extends Component {
     });
 
     this.geocoder = new google.maps.Geocoder();
+    Promise.promisifyAll(this);
+    this.handleCentralAddressAsync();
 
     Promise.promisifyAll(this);
   }
@@ -56,7 +62,25 @@ class Search extends Component {
   handleSearch(e, text) {
     let currentAddresses = this.grabAddresses(e);
     let filteredAddresses = currentAddresses.filter(address => Boolean(address));
+    this.grabYelpData(text, (rawData) => {
+      console.log('Raw meat: ', rawData);
+      this.handleYelpMarker(rawData.businesses);
+    });
 
+    // puts central address marker down
+    this.geocoder.geocode({'address': this.state.centralAddress}, (results, status) => {
+      if (status === google.maps.GeocoderStatus.OK) {
+        let location = results[0].geometry.location;
+        this.map.setCenter(location);
+        this.marker.push(new google.maps.Marker({
+          map: this.map,
+          animation: google.maps.Animation.BOUNCE,
+          position: location,
+          icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+        }));
+      }
+    });
+    
     this.handleCentralAddressAsync(filteredAddresses, () => {
       if (this.marker !== undefined) {
         this.deletePastMarkers();
@@ -135,6 +159,7 @@ class Search extends Component {
         });
       });
     });
+    // });
   }
 
   handleYelpMarker(rawData, length) {
@@ -192,6 +217,8 @@ class Search extends Component {
       return res.json();
     }).then((res) => {
       callback(res);
+    }).catch(err => {
+      console.error(err);
     });    
   }
 

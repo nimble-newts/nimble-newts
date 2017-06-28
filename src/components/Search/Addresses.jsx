@@ -14,8 +14,18 @@ class Addresses extends Component {
   }
 
   handleAdd(e) {
+    let currentAddresses = [];
+    let children = e.target.parentNode.children;
+    for (let i = 0; i < children.length - 1; i++) {
+      currentAddresses.push(children[i].children[0].value);
+    }
+    currentAddresses.push('');
+
     this.setState(prevState => {
-      return { number: prevState.number + 1 };
+      return { 
+        number: prevState.number + 1,
+        addresses: currentAddresses 
+      };
     });
   }
 

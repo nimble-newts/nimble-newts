@@ -5,14 +5,14 @@ import Promise from 'bluebird';
 
 class Search extends Component {
   constructor(props) {
-    super(props);
+    super(props); 
 
     this.state = {
       addresses: [],
       centralAddress: '',
       dummyData: {
         lat: 37.4238253802915,
-        lng: -122.0829009197085
+        lng: -122.0829009197085 
       }
     };
 
@@ -29,15 +29,16 @@ class Search extends Component {
   }
 
   componentDidMount() {
+    console.log('Mounting...');
     this.map = new google.maps.Map(this.refs.map, {
       zoom: 14,
       center: this.state.dummyData
     });
-
+    console.log('Wall');
     this.geocoder = new google.maps.Geocoder();
     Promise.promisifyAll(this);
     this.handleCentralAddressAsync();
-
+    console.log('Finished mounting...');
   }
 
   handleNav() {
@@ -50,15 +51,6 @@ class Search extends Component {
       this.deletePastMarkers();
     }
 
-<<<<<<< 1368d2bf316756fc3a314f6b4f7aa5da49ecaa33
-=======
-    this.grabYelpData(text, (rawData) => {
-      console.log('Raw meat: ', rawData);
-      this.handleYelpMarker(rawData.businesses);
-    });
-
-    // puts central address marker down
->>>>>>> Fix markers to display correct info window
     this.geocoder.geocode({'address': this.state.centralAddress}, (results, status) => {
       if (status === google.maps.GeocoderStatus.OK) {
         let location = results[0].geometry.location;
@@ -96,17 +88,6 @@ class Search extends Component {
   }
 
   handleCentralAddress() {
-    // turn all elements in addresses to lat + long
-    // this.state.addresses.map(address => {
-    //   return new Promise((resolve, reject) => {
-
-    //   });
-    // });
-    // find central location
-    // set state to new central address
-    // this.setStateAsync({
-    //   centralAddress: '944 Market Street San Francisco'
-    // }).then(_ => {
     console.log(`These are my addresses:`, this.state.addresses);
     Promise.map(this.state.addresses, (address) => {
       console.log('Address current:', address);
@@ -126,6 +107,7 @@ class Search extends Component {
         return new Promise((resolve, reject) => {
           var lat = location[0];
           var long = location[1];
+          console.log('Promise, extending bounds');
           bound.extend( new google.maps.LatLng(lat, long));
           resolve();
         });
@@ -151,12 +133,7 @@ class Search extends Component {
           }
         });
       });
-        // reverse geocode stuff to a location
-        
-        // then, set location to central address
-
     });
-    // });
   }
 
   handleYelpMarker(rawData) {
@@ -174,7 +151,6 @@ class Search extends Component {
         animation: google.maps.Animation.DROP,
         position: position
       }));
-
 
       let content = 
         '<div>' +
@@ -227,16 +203,11 @@ class Search extends Component {
       <div className="Search">
         <input type="submit" onClick={this.handleNav} value="Go to profile"></input>        
         <SearchBar handleSearch={this.handleSearch}/>
-<<<<<<< 1368d2bf316756fc3a314f6b4f7aa5da49ecaa33
         <Addresses handleAddress={this.handleAddress}/>
-=======
-        <Addresses addAddressToList={this.addAddressToList} handleAddress={this.handleAddress} handleAddAddress={this.handleAddAddress}/>
->>>>>>> Fix markers to display correct info window
-        <div ref='map' style={style}></div>
+        <div ref="map" style={style}></div>
       </div>
     );
   }
 }
 
 export default Search;
-

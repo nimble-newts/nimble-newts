@@ -75,6 +75,13 @@ app.post('/profile', function(req, res) {
   });
 });
 
+app.post('/friends', function(req, res) {
+  User.findOne({ 'id': req.body.userID }, function(err, person) {
+    if (err) { return err; }
+    res.send(person.friends);
+  });
+});
+
 app.put('/friends', function(req, res) {
   let targetName = req.body.name;
   let targetAddress = req.body.address;

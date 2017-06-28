@@ -89,7 +89,7 @@ class Search extends Component {
         lng: item.coordinates.longitude
       };
 
-      let i  = index + 1;
+      let i = index + 1;
 
       this.marker.push(new google.maps.Marker({
         map: this.map,

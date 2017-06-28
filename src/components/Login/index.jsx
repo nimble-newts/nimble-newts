@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+// import Background from '../../../dist/images/background.jpg';
 
 class Login extends Component {
   constructor(props) {
@@ -45,12 +46,17 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="Welcome">
-        <div className="Login-header">APP NAME</div>
-        <input type="submit" value="Log in" onClick={this.handleLogin}></input>
+      <div className='ui vertical masthead center aligned segment'>
+        <div className='ui container'>          
+          <button onClick={this.handleLogin} className='ui big facebook button'>
+            <i className='facebook icon'></i>
+            Login
+          </button>
+        </div>
       </div>
     );
   }
 }
 
 export default Login;
+

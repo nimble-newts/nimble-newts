@@ -46,9 +46,9 @@ class Login extends Component {
 
   render() {
     return (
-      <div className='ui vertical masthead center aligned segment'>
-        <div className='ui container'>          
-          <button onClick={this.handleLogin} className='ui big facebook button'>
+      <div className='ui middle aligned center aligned grid'>
+        <div className='column'>
+          <button onClick={this.handleLogin} className='ui fluid big facebook button'>
             <i className='facebook icon'></i>
             Login
           </button>

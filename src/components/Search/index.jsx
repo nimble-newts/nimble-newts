@@ -8,7 +8,7 @@ import Promise from 'bluebird';
 
 class Search extends Component {
   constructor(props) {
-    super(props);
+    super(props); 
 
     this.state = {
       addresses: [],
@@ -34,16 +34,15 @@ class Search extends Component {
   }
 
   componentDidMount() {
+    console.log('Mounting...');
     this.map = new google.maps.Map(this.refs.map, {
       zoom: 14,
       center: this.state.dummyData
     });
-
+    console.log('Wall');
     this.geocoder = new google.maps.Geocoder();
     Promise.promisifyAll(this);
     this.handleCentralAddressAsync();
-
-    Promise.promisifyAll(this);
   }
 
   handleNav() {
@@ -159,7 +158,6 @@ class Search extends Component {
         });
       });
     });
-    // });
   }
 
   handleYelpMarker(rawData, length) {
@@ -264,4 +262,3 @@ class Search extends Component {
 }
 
 export default Search;
-

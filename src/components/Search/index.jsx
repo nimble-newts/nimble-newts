@@ -22,7 +22,6 @@ class Search extends Component {
     this.deletePastMarkers = this.deletePastMarkers.bind(this);      
     this.handleSearch = this.handleSearch.bind(this);
     this.handleAddress = this.handleAddress.bind(this);
-    this.handleAddAddress = this.handleAddAddress.bind(this);
     this.handleCentralAddress = this.handleCentralAddress.bind(this);
     this.handleYelpMarker = this.handleYelpMarker.bind(this);
     this.grabYelpData = this.grabYelpData.bind(this);
@@ -48,22 +47,23 @@ class Search extends Component {
       this.deletePastMarkers();
     }
 
-
-    this.grabYelpData(text, (rawData) => {
-      this.handleYelpMarker(rawData.businesses);
-    });
-
     this.geocoder.geocode({'address': this.state.centralAddress}, (results, status) => {
       if (status === google.maps.GeocoderStatus.OK) {
         let location = results[0].geometry.location;
         this.map.setCenter(location);
         this.marker.push(new google.maps.Marker({
           map: this.map,
-          animation: google.maps.Animation.DROP,
-          position: location
+          animation: google.maps.Animation.BOUNCE,
+          position: location,
+          icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
         }));
       }
     });
+
+    this.grabYelpData(text, (rawData) => {
+      this.handleYelpMarker(rawData.businesses);
+    });
+
   }
 
   handleAddress(e) {
@@ -72,10 +72,7 @@ class Search extends Component {
     });
   }
 
-  handleAddAddress() {
-    this.state.addresses.push(this.state.address);
-  }
-
+  
   handleCentralAddress() {
     //TODO: With this.state.addresses (an array), map through the addresses 
     // Grab central point
@@ -91,9 +88,12 @@ class Search extends Component {
         lat: item.coordinates.latitude,
         lng: item.coordinates.longitude
       };
+
+      let i  = index + 1;
+
       this.marker.push(new google.maps.Marker({
         map: this.map,
-        animation: google.maps.Animation.BOUNCE,
+        animation: google.maps.Animation.DROP,
         position: position
       }));
 
@@ -109,8 +109,8 @@ class Search extends Component {
         content: content
       });
 
-      this.marker[index].addListener('click', () => {
-        infoWindow.open(this.map, this.marker[index]);
+      this.marker[i].addListener('click', () => {
+        infoWindow.open(this.map, this.marker[i]);
       });
     });
   }
@@ -147,7 +147,7 @@ class Search extends Component {
       <div className="Search">
         <input type="submit" onClick={this.handleNav} value="Go to profile"></input>        
         <SearchBar handleSearch={this.handleSearch}/>
-        <Addresses handleAddress={this.handleAddress} handleAddAddress={this.handleAddAddress}/>
+        <Addresses handleAddress={this.handleAddress}/>
         <div ref='map' style={style}></div>
       </div>
     );

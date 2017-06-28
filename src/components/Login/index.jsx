@@ -47,11 +47,16 @@ class Login extends Component {
   render() {
     return (
       <div className='ui middle aligned center aligned grid'>
+        <div className='login'>
         <div className='column'>
-          <button onClick={this.handleLogin} className='ui fluid big facebook button'>
-            <i className='facebook icon'></i>
-            Login
-          </button>
+            <h2> Nimble Newts Ultimate Unicorn Funtime App </h2>
+            <div className='button'>
+              <button onClick={this.handleLogin} className='ui fluid big facebook button'>
+                <i className='facebook icon'></i>
+                Login
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     );

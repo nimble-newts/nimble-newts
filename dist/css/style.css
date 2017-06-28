@@ -1,0 +1,9 @@
+.login {
+  position: relative;
+  transform: translateY(350%);
+}
+
+.login .button {
+  max-width: 200px;
+  margin: auto;
+}

@@ -31,6 +31,10 @@ class Addresses extends Component {
     });
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({ addresses: nextProps.currentAddresses });
+  }
+
   handleAdd(e) {
     let currentAddresses = [];
     let children = e.target.parentNode.children;

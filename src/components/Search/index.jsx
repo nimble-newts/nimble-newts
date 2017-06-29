@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
+import Promise from 'bluebird';
 import SearchBar from './Searchbar.jsx';
 import Addresses from './Addresses.jsx';
 import { handleSave } from './helpers/save.js';
@@ -9,21 +10,20 @@ class Search extends Component {
     super(props);
 
     this.state = {
-      address: '',
-      addresses: [],
-      centralAddress: '',
       dummyData: {
         lat: 37.4238253802915,
         lng: -122.0829009197085
-      }
+      },
+      currentAddresses: []
     };
 
     this.map;
     this.marker = [];
     this.geocoder;
+    this.centralAddress = '';
+
     this.deletePastMarkers = this.deletePastMarkers.bind(this);      
     this.handleSearch = this.handleSearch.bind(this);
-    this.handleAddress = this.handleAddress.bind(this);
     this.handleCentralAddress = this.handleCentralAddress.bind(this);
     this.handleYelpMarker = this.handleYelpMarker.bind(this);
     this.grabYelpData = this.grabYelpData.bind(this);
@@ -37,50 +37,103 @@ class Search extends Component {
 
     this.geocoder = new google.maps.Geocoder();
 
-    this.handleCentralAddress();
+    Promise.promisifyAll(this);
   }
 
   handleNav() {
     document.location.href = '/profile';
   }
 
-  handleSearch(text) {
-    if (this.marker !== undefined) {
-      this.deletePastMarkers();
+  grabAddresses(e) {
+    let currentAddresses = [];
+    let addressesDiv = e.target.parentNode.parentNode.children[2].children;
+    for (let i = 0; i < addressesDiv.length - 1; i++) {
+      currentAddresses.push(addressesDiv[i].firstChild.value);
     }
+    return currentAddresses;
+  }
 
-    this.geocoder.geocode({'address': this.state.centralAddress}, (results, status) => {
-      if (status === google.maps.GeocoderStatus.OK) {
-        let location = results[0].geometry.location;
-        this.map.setCenter(location);
-        this.marker.push(new google.maps.Marker({
-          map: this.map,
-          animation: google.maps.Animation.BOUNCE,
-          position: location,
-          icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
-        }));
+  handleSearch(e, text) {
+    let currentAddresses = this.grabAddresses(e);
+    let filteredAddresses = currentAddresses.filter(address => Boolean(address));
+
+    this.handleCentralAddressAsync(filteredAddresses, () => {
+      if (this.marker !== undefined) {
+        this.deletePastMarkers();
       }
-    });
 
-    this.grabYelpData(text, (rawData) => {
-      this.handleYelpMarker(rawData.businesses);
-    });
+      Promise.map(filteredAddresses, address => {
+        this.geocoder.geocode({'address': address}, (results, status) => {
+          if (status === google.maps.GeocoderStatus.OK) {
+            let location = results[0].geometry.location;
+            this.marker.push(new google.maps.Marker({
+              map: this.map,
+              animation: google.maps.Animation.BOUNCE,
+              position: location,
+              icon: 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png'
+            }));
+          }
+        }); 
+      }).then(() => {
+        this.geocoder.geocode({'address': this.centralAddress}, (results, status) => {
+          if (status === google.maps.GeocoderStatus.OK) {
+            let location = results[0].geometry.location;
+            this.map.setCenter(location);
+            this.marker.push(new google.maps.Marker({
+              map: this.map,
+              animation: google.maps.Animation.BOUNCE,
+              position: location,
+              icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+            }));
+          }
 
+          this.grabYelpData(text, (rawData) => {
+            this.handleYelpMarker(rawData.businesses);
+            this.setState({ currentAddresses: currentAddresses });
+          });
+        });
+      });
+    });
   }
 
-  handleAddress(e) {
-    this.setState({
-      address: e
-    });
-  }
+  handleCentralAddress(filteredAddresses, callback) {
+    Promise.map(filteredAddresses, (address) => {
+      return new Promise((resolve, reject) => {
+        this.geocoder.geocode({'address': address}, (results, status) => {
+          let latLongHolder = results[0].geometry.location;
+          resolve([latLongHolder.lat(), latLongHolder.lng()]);
+        });
+      }); 
+    }).then(locations => {
+      let bound = new google.maps.LatLngBounds();
 
-  
-  handleCentralAddress() {
-    //TODO: With this.state.addresses (an array), map through the addresses 
-    // Grab central point
-    // Set state of centralLocation to the central place
-    this.setState({
-      centralAddress: '944 Market Street San Francisco'
+      Promise.map(locations, (location) => {
+        return new Promise((resolve, reject) => {
+          let lat = location[0];
+          let long = location[1];
+          bound.extend( new google.maps.LatLng(lat, long));
+          resolve();
+        });
+      }).then(_ => {
+        return new Promise((resolve, reject) => {
+          let center = bound.getCenter();
+          let lat = center.lat();
+          let lng = center.lng();
+          let latlng = {
+            lat: parseFloat(lat),
+            lng: parseFloat(lng)
+          };
+          this.geocoder.geocode({'location': latlng}, (results, status) => {
+            if (status === 'OK') {
+              if (results[0]) {
+                let centralAddress = results[0].formatted_address;
+                this.centralAddress = centralAddress;
+                callback();
+              }
+            }
+          });
+        });
+      });
     });
   }
 
@@ -128,7 +181,7 @@ class Search extends Component {
       method: 'POST',
       body: JSON.stringify({
         'searchText': text,
-        'address': this.state.centralAddress
+        'address': this.centralAddress
       }),
       headers: {
         'Content-Type': 'application/json'
@@ -155,7 +208,7 @@ class Search extends Component {
       <div className="Search">
         <input type="submit" onClick={this.handleNav} value="Go to profile"></input>        
         <SearchBar handleSearch={this.handleSearch}/>
-        <Addresses handleAddress={this.handleAddress}/>
+        <Addresses currentAddresses={this.state.currentAddresses}/>
         <div ref='map' style={style}></div>
       </div>
     );

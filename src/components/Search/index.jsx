@@ -70,7 +70,7 @@ class Search extends Component {
               map: this.map,
               animation: google.maps.Animation.BOUNCE,
               position: location,
-              icon: 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png'
+              icon: 'https://maps.google.com/mapfiles/ms/icons/yellow-dot.png'
             }));
           }
         }); 
@@ -83,7 +83,7 @@ class Search extends Component {
               map: this.map,
               animation: google.maps.Animation.BOUNCE,
               position: location,
-              icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+              icon: 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png'
             }));
           }
 

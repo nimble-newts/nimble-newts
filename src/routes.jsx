@@ -6,14 +6,14 @@ import { createStore } from 'redux';
 import Login from './components/Login/index.jsx';
 import Search from './components/Search/index.jsx';
 import Profile from './components/Profile/index.jsx';
-
+import NewUser from './components/NewUser/index.jsx';
 // let store = createStore(/*reducer*/);
 
 const Routes = ({ store }) => (
   <BrowserRouter>
     <div>
       <Route exact path="/" component={Login} />
-      <Route path="/blah" component={Search} />
+      <Route path="/newUser" component={NewUser} />
       <Route path="/search" component={Search} />
       <Route path="/profile" component={Profile} />
     </div>
@@ -21,5 +21,3 @@ const Routes = ({ store }) => (
 );
 
 export default Routes;
-// <Provider store={store}> 
-// </Provider>

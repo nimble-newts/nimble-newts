@@ -28,13 +28,12 @@ app.post('/login', function(req, res) {
         var user = new User({ 'id': userID, 'photoUrl': body.picture.data.url, 'name': body.name });
         user.save(function(err, saved) {
           if (err) { return err; }
-          res.send({ redirect: '/search' });
+          res.send({ redirect: '/newUser' });
         });
       });
     } else {
       console.log('user already exists!');
       res.send({ redirect: '/search' });
-      // redirect to new user page rather than search page?
     } 
   });
 });
@@ -84,6 +83,7 @@ app.post('/profile', function(req, res) {
 });
 
 app.post('/friends', function(req, res) {
+
   User.findOne({ 'id': req.body.userID }, function(err, person) {
     if (err) { return err; }
     res.send(person.friends);

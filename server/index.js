@@ -150,7 +150,7 @@ app.post('/suggestions', function(req, res) {
   });
 });
 
-app.delete('/suggestions', function(req, res) {
+app.put('/suggestions', function(req, res) {
   console.log('removing location:', req.body.name);
   User.findOne({ 'id': req.body.userID }, function(err, person) {
     if (err) { return err; }

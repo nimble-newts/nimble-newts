@@ -1,9 +1,28 @@
-.login {
-  position: relative;
-  transform: translateY(350%);
+body {
+  background-image: url(../images/background.jpg);
+  background-position: center bottom;  
+  background-size: cover;
 }
+
+.login .segment {
+  position: relative;
+  transform: translateY(300%);
+  text-align: center;
+  background: rgba(0,0,0,0.3);
+  background-size: 500px;
+ }
+
+ .login .header {
+  color: white ;
+  text-shadow: 1px 1px 4px#000;
+ }
 
 .login .button {
   max-width: 200px;
   margin: auto;
+}
+
+.map {
+  height: 10%;
+  width: 10%;
 }

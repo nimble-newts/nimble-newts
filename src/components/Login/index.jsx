@@ -46,10 +46,10 @@ class Login extends Component {
 
   render() {
     return (
-      <div className='ui middle aligned center aligned grid'>
-        <div className='login'>
-        <div className='column'>
-            <h2> Nimble Newts Ultimate Unicorn Funtime App </h2>
+      <div className='login'>
+        <div className='ui middle aligned center aligned grid'>
+          <div className='ui segment'>
+            <h1 className='header'> Nimble Newts Ultimate Unicorn Funtime App </h1>
             <div className='button'>
               <button onClick={this.handleLogin} className='ui fluid big facebook button'>
                 <i className='facebook icon'></i>

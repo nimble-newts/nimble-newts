@@ -1,0 +1,45 @@
+/*GENERAL
+/*TODO: Fix so that the body css is only rendered for the login page*/
+/*body {
+  background-image: url(../images/background.jpg);
+  background-position: center bottom;  
+  background-size: cover;
+}*/
+
+/*LOGIN PAGE*/
+
+.login .segment {
+  position: relative;
+  transform: translateY(300%);
+  text-align: center;
+  background: rgba(112,128,144, 0.3);
+  background-size: 500px;
+ }
+
+ .login .header {
+  color: white ;
+  text-shadow: 1px 1px 4px#000;
+ }
+
+.login .button {
+  max-width: 150px;
+  margin: auto;
+  text-align: center;
+}
+
+/*SEARCH PAGE*/
+body .searchPage {
+  height: 100%;
+  width: 100%;
+}
+
+.searchPage .ui.page.grid {
+  width: 100%;
+  height: 100%;
+}
+
+.map {
+  width: 100%;
+  height: 100%;
+  border: 1px black solid;
+}

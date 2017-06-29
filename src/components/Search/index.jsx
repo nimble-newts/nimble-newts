@@ -203,14 +203,34 @@ class Search extends Component {
   }
 
   render() {
-    const style = {width: 500, height: 500, border: '1p black solid' };
+    const style = {width: 500, height: 500 , border: '1p black solid'};
     
     return (
-      <div className="Search">
-        <input type="submit" onClick={this.handleNav} value="Go to profile"></input>        
-        <SearchBar handleSearch={this.handleSearch}/>
-        <Addresses currentAddresses={this.state.currentAddresses}/>
-        <div ref='map' style={style}></div>
+      <div className='searchPage'>
+        <div className="ui page grid">
+            <div className="two column row">
+                <div className="column"> 
+                    <div className="ui segment">
+                        <div className="ui vertical segment">
+                          <SearchBar handleSearch={this.handleSearch}/>
+                        </div>
+                        <div className="ui vertical segment">
+                          <Addresses currentAddresses={this.state.currentAddresses}/>
+                        </div>
+                    </div>
+                </div>
+                <div className="column"> 
+                  <div className="ui segment">
+                      <div className="ui vertical segment">
+                        <input type="submit" onClick={this.handleNav} value="Go to profile"></input>        
+                      </div>
+                      <div className="ui vertical segment">
+                        <div ref='map' className='map'></div>
+                      </div>
+                  </div>
+                </div>
+            </div>
+      </div>
       </div>
     );
   }

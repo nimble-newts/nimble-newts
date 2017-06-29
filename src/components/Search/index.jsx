@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { findDOMNode } from 'react-dom';
 import SearchBar from './Searchbar.jsx';
 import Addresses from './Addresses.jsx';
+import { handleSave } from './helpers/save.js';
 
 class Search extends Component {
   constructor(props) {
@@ -98,12 +100,15 @@ class Search extends Component {
       }));
 
 
-      let content = 
-        '<div>' +
-        '<h3>' + item.name + '</h3>' +
-        '<div>' + item.url + '</div>' +
-        '<div>' + item.location.address1 + '</div>' +
-        '</div>';
+      let content =
+        `<div>
+          <h3 class="name">${item.name}</h3>
+          <a href="${item.url}" class="url">yelp</a>
+          <div class="address1">${item.location.address1}</div>
+          <div class="city">${item.location.city}</div>
+          <div class="zip">${item.location.zip_code}</div>
+          <input id="marker-save" type="submit" value ="save" data-action="save">
+        </div>`;
 
       let infoWindow = new google.maps.InfoWindow({
         content: content
@@ -113,6 +118,9 @@ class Search extends Component {
         infoWindow.open(this.map, this.marker[i]);
       });
     });
+
+    let map = findDOMNode(this.refs.map);
+    $(map).on('click', '#marker-save', function(event) { handleSave($(this)); });
   }
 
   grabYelpData(text, callback) {

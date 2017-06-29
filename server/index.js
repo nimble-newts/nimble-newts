@@ -25,7 +25,6 @@ app.post('/login', function(req, res) {
     if (person === null) {
       request('https://graph.facebook.com/' + userID + '?fields=name,picture&access_token=' + token, function(err, response, body) {
         body = JSON.parse(body);
-        console.log('creating new user: ', userID);
         var user = new User({ 'id': userID, 'photoUrl': body.picture.data.url, 'name': body.name });
         user.save(function(err, saved) {
           if (err) { return err; }

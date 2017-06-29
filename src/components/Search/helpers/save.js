@@ -28,7 +28,7 @@ const handleSave = (target) => {
         target.attr('data-action', 'unsave');
       });
     } else {
-      locOptions.method = 'delete';
+      locOptions.method = 'put';
       fetch('/suggestions', locOptions).then(res => {
         target.attr('value', 'save');
         target.attr('data-action', 'save');

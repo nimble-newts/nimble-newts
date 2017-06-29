@@ -88,7 +88,7 @@ class Search extends Component {
           }
 
           this.grabYelpData(text, (rawData) => {
-            this.handleYelpMarker(rawData.businesses);
+            this.handleYelpMarker(rawData.businesses, filteredAddresses.length);
             this.setState({ currentAddresses: currentAddresses });
           });
         });
@@ -137,14 +137,14 @@ class Search extends Component {
     });
   }
 
-  handleYelpMarker(rawData) {
+  handleYelpMarker(rawData, length) {
     rawData.map((item, index) => {
       let position = {
         lat: item.coordinates.latitude,
         lng: item.coordinates.longitude
       };
-
-      let i = index + 1;
+      
+      let i = index + length + 1;
 
       this.marker.push(new google.maps.Marker({
         map: this.map,
@@ -199,6 +199,7 @@ class Search extends Component {
     for (var i = 0; i < this.marker.length; i++) {
       this.marker[i].setMap(null);
     }
+    this.marker = [];
   }
 
   render() {

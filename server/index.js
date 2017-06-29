@@ -34,7 +34,8 @@ app.post('/login', function(req, res) {
     } else {
       console.log('user already exists!');
       res.send({ redirect: '/search' });
-    }
+      // redirect to new user page rather than search page?
+    } 
   });
 });
 
@@ -176,3 +177,9 @@ app.get('*', function (req, res) {
 app.listen(port, _ => {
   console.log(`Server connected to port number: ${port}`);
 });
+
+// when user gets authenticated in
+  // user is redirected to search page
+  // there should be a popup on top of the page
+  // popup should show user how to use the app
+  // user can close the popup to carry on with using the app

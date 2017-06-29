@@ -13,6 +13,7 @@ const Routes = ({ store }) => (
   <BrowserRouter>
     <div>
       <Route exact path="/" component={Login} />
+      <Route path="/blah" component={Search} />
       <Route path="/search" component={Search} />
       <Route path="/profile" component={Profile} />
     </div>

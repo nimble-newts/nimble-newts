@@ -67,7 +67,7 @@ class Search extends Component {
 
   grabAddresses(e) {
     let currentAddresses = [];
-    let addressesDiv = e.target.parentNode.parentNode.children[4].children;
+    let addressesDiv = e.target.parentNode.parentNode.parentNode.children[1].children[0].children;
     for (let i = 0; i < addressesDiv.length - 1; i++) {
       currentAddresses.push(addressesDiv[i].firstChild.firstChild.firstChild.value);
     }

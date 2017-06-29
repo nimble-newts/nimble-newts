@@ -32,7 +32,7 @@ app.post('/login', function(req, res) {
         });
       });
     } else {
-      console.log('already exists!');
+      console.log('user already exists!');
       res.send({ redirect: '/search' });
     }
   });
@@ -109,11 +109,7 @@ app.put('/friends', function(req, res) {
   });
 });
 
-app.get('*', function (req, res) {
-  res.sendFile(path.resolve(__dirname + '/../dist/index.html'));
-});
-
-app.post('/searches', function (req, res) {
+app.post('/searches', function(req, res) {
   var search = req.body.searchText;
   var address = req.body.address;
 
@@ -131,6 +127,50 @@ app.post('/searches', function (req, res) {
     body = JSON.parse(body);
     res.send(body);
   });
+});
+
+app.post('/suggestions', function(req, res) {
+  console.log('saving location:', req.body.name);
+  let locInfo = {
+    name: req.body.name,
+    address: req.body.address,
+    city: req.body.city,
+    zip: req.body.zip,
+    url: req.body.url
+  };
+
+  User.findOne({ 'id': req.body.userID }, function(err, person) {
+    if (err) { return err; }
+    if (person === null) { console.log('error: no user found'); return; }
+
+    person.suggestions.push(locInfo);
+    person.save(function(err, updated) {
+      res.send(updated);
+    });
+  });
+});
+
+app.delete('/suggestions', function(req, res) {
+  console.log('removing location:', req.body.name);
+  User.findOne({ 'id': req.body.userID }, function(err, person) {
+    if (err) { return err; }
+    if (person === null) { console.log('error: no user found'); return; }
+
+    let removeIndex = 0;
+    person.suggestions.forEach((suggestion, index) => {
+      if (suggestion.name === req.body.name && suggestion.address === req.body.address) {
+        removeIndex = index;
+      }
+    });
+    person.suggestions.splice(removeIndex, 1);
+    person.save(function(err, updated) {
+      res.send(updated);
+    });
+  });
+});
+
+app.get('*', function (req, res) {
+  res.sendFile(path.resolve(__dirname + '/../dist/index.html'));
 });
  
 app.listen(port, _ => {

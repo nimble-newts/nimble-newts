@@ -106,7 +106,6 @@ class Address extends Component {
       <div className="Address">
         <input type="text" value={this.props.storedAddress} onChange={ e => {
           this.handleChange(e);
-          this.props.changeAddress(e.target.value, this.props.index); 
         }
         } ref="address" required></input>
         {this.state.adding === false ? (

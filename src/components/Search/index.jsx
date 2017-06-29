@@ -4,17 +4,12 @@ import Promise from 'bluebird';
 import SearchBar from './Searchbar.jsx';
 import Addresses from './Addresses.jsx';
 import { handleSave } from './helpers/save.js';
-import Promise from 'bluebird';
 
 class Search extends Component {
   constructor(props) {
-    super(props); 
+    super(props);
 
     this.state = {
-
-      addresses: ['1450 Franklin San Francisco', '1451 Montgomery St San Francisco', '', '500 Paris Street San Francisco', '123 blah blha street san francisco', '4296 Meh meh street san francisco'],
-      // addresses: [],
-      centralAddress: '',
       dummyData: {
         lat: 37.4238253802915,
         lng: -122.0829009197085
@@ -22,7 +17,6 @@ class Search extends Component {
       currentAddresses: []
     };
 
-    this.changeAddress = this.changeAddress.bind(this);
     this.map;
     this.marker = [];
     this.geocoder;
@@ -33,18 +27,6 @@ class Search extends Component {
     this.handleCentralAddress = this.handleCentralAddress.bind(this);
     this.handleYelpMarker = this.handleYelpMarker.bind(this);
     this.grabYelpData = this.grabYelpData.bind(this);
-    // this.addAddressToList = this.addAddressToList.bind(this);
-  }
-
-  changeAddress (newAddress, i) {
-    this.setStateAsync((prevState, props) => {
-      console.log('Addresses:', this.state.addresses);
-      var array = prevState.addresses.slice();
-      array.splice(i, 1, newAddress);
-      return {addresses: array};
-    }).then(_ => {
-      // console.log('Changed the addresses: ', JSON.stringify(this.state, null, 2));
-    });
   }
 
   componentDidMount() {
@@ -52,9 +34,10 @@ class Search extends Component {
       zoom: 14,
       center: this.state.dummyData
     });
+
     this.geocoder = new google.maps.Geocoder();
+
     Promise.promisifyAll(this);
-    this.handleSearch('Burritos');
   }
 
   handleNav() {
@@ -73,25 +56,7 @@ class Search extends Component {
   handleSearch(e, text) {
     let currentAddresses = this.grabAddresses(e);
     let filteredAddresses = currentAddresses.filter(address => Boolean(address));
-    this.grabYelpData(text, (rawData) => {
-      console.log('Raw meat: ', rawData);
-      this.handleYelpMarker(rawData.businesses);
-    });
 
-    // puts central address marker down
-    this.geocoder.geocode({'address': this.state.centralAddress}, (results, status) => {
-      if (status === google.maps.GeocoderStatus.OK) {
-        let location = results[0].geometry.location;
-        this.map.setCenter(location);
-        this.marker.push(new google.maps.Marker({
-          map: this.map,
-          animation: google.maps.Animation.BOUNCE,
-          position: location,
-          icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
-        }));
-      }
-    });
-    
     this.handleCentralAddressAsync(filteredAddresses, () => {
       if (this.marker !== undefined) {
         this.deletePastMarkers();
@@ -168,7 +133,6 @@ class Search extends Component {
             }
           });
         });
-        
       });
     });
   }
@@ -187,6 +151,7 @@ class Search extends Component {
         animation: google.maps.Animation.DROP,
         position: position
       }));
+
 
       let content =
         `<div>
@@ -227,8 +192,6 @@ class Search extends Component {
       return res.json();
     }).then((res) => {
       callback(res);
-    }).catch(err => {
-      console.error(err);
     });    
   }
 

@@ -11,7 +11,9 @@ class Search extends Component {
     super(props); 
 
     this.state = {
-      addresses: [],
+
+      addresses: ['1450 Franklin San Francisco', '1451 Montgomery St San Francisco', '', '500 Paris Street San Francisco', '123 blah blha street san francisco', '4296 Meh meh street san francisco'],
+      // addresses: [],
       centralAddress: '',
       dummyData: {
         lat: 37.4238253802915,
@@ -20,6 +22,7 @@ class Search extends Component {
       currentAddresses: []
     };
 
+    this.changeAddress = this.changeAddress.bind(this);
     this.map;
     this.marker = [];
     this.geocoder;
@@ -30,19 +33,28 @@ class Search extends Component {
     this.handleCentralAddress = this.handleCentralAddress.bind(this);
     this.handleYelpMarker = this.handleYelpMarker.bind(this);
     this.grabYelpData = this.grabYelpData.bind(this);
-    this.addAddressToList = this.addAddressToList.bind(this);
+    // this.addAddressToList = this.addAddressToList.bind(this);
+  }
+
+  changeAddress (newAddress, i) {
+    this.setStateAsync((prevState, props) => {
+      console.log('Addresses:', this.state.addresses);
+      var array = prevState.addresses.slice();
+      array.splice(i, 1, newAddress);
+      return {addresses: array};
+    }).then(_ => {
+      // console.log('Changed the addresses: ', JSON.stringify(this.state, null, 2));
+    });
   }
 
   componentDidMount() {
-    console.log('Mounting...');
     this.map = new google.maps.Map(this.refs.map, {
       zoom: 14,
       center: this.state.dummyData
     });
-    console.log('Wall');
     this.geocoder = new google.maps.Geocoder();
     Promise.promisifyAll(this);
-    this.handleCentralAddressAsync();
+    this.handleSearch('Burritos');
   }
 
   handleNav() {
@@ -156,6 +168,7 @@ class Search extends Component {
             }
           });
         });
+        
       });
     });
   }
@@ -174,7 +187,6 @@ class Search extends Component {
         animation: google.maps.Animation.DROP,
         position: position
       }));
-
 
       let content =
         `<div>

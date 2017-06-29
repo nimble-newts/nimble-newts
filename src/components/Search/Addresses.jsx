@@ -6,7 +6,7 @@ class Addresses extends Component {
     super(props);
     this.state = { 
       number: 2,
-      addresses: []      
+      addresses: []
     };
 
     this.handleDelete = this.handleDelete.bind(this);
@@ -42,9 +42,10 @@ class Addresses extends Component {
     for (let i = 0; i < children.length - 1; i++) {
       currentAddresses.push(children[i].children[0].value);
     }
-    currentAddresses.push('');
+    // currentAddresses.push('');
 
     this.setState(prevState => {
+      console.log('Current addresses:', currentAddresses);
       return { 
         number: prevState.number + 1,
         addresses: currentAddresses 
@@ -54,30 +55,56 @@ class Addresses extends Component {
 
   handleDelete(e) {
     let currentAddresses = [];
+    var stuff = Array.from(e.target.parentNode.children).map(({value}) => value);
+    console.log('Lets see the parent node stuff:', stuff);
     let deleteValue = e.target.parentNode.children[0].value;
-    let children = e.target.parentNode.parentNode.children;
+    console.log('Grandparent node:', e.target.parentNode.parentNode);
+    let children = e.target.parentNode.parentNode.children; //array of address components
+    let parent = e.target.parentNode.children; 
+    console.log('parent:', parent);
     for (let i = 0; i < children.length - 1; i++) {
       let childValue = children[i].children[0].value;
-      if (childValue !== deleteValue) { currentAddresses.push(childValue); }
+      if (childValue !== deleteValue) {
+        currentAddresses.push(childValue); 
+      } else {
+        console.log('Deleteing stuff, dun dun dun. Element #', i);
+        this.props.changeAddress('', i);
+      }
     }
 
     this.setState(prevState => {
       return { 
-        number: prevState.number - 1,
+        number: prevState.number - 1, // keep track of number of things!
         addresses: currentAddresses
       };
     });
   }
 
   render() {
+    // console.log('RERENDERING ADDRESEES!');
+    console.log('Stored addresses:', this.state.addresses);
+    let storedAddresses = this.props.addresses;
     let addresses = [];
-    for (let i = 0; i < this.state.number; i++) {
-      let address = this.state.addresses[i];
-      addresses.push(<Address addressNumber={this.state.number} addAddressToList={this.addAddressToList} address={address} onDelete={this.handleDelete} key={i} />);
+    
+    for (let i = 0; i < 5; i++) {
+    // for (let i = 0; i < this.state.number; i++) {
+      let address = storedAddresses[i];
+      addresses.push(
+      <Address 
+        changeAddress={this.props.changeAddress}
+        storedAddress={storedAddresses[i]}
+        index={i}
+        addressNumber={this.state.number} 
+        addAddressToList={this.addAddressToList} 
+        address={address} 
+        onDelete={this.handleDelete} 
+        key={i} 
+      />);
     }
 
+
     return (
-      <div className="Addresses">
+      <div className="Addresses" ref="addresses">
         {addresses}
         {this.state.number === 5 ? (
           <input type="submit" disabled="disabled" value="Add Address" ></input>

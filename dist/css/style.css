@@ -1,10 +1,10 @@
 /*GENERAL
 /*TODO: Fix so that the body css is only rendered for the login page*/
-/*body {
+body {
   background-image: url(../images/background.jpg);
   background-position: center bottom;  
   background-size: cover;
-}*/
+}
 
 /*LOGIN PAGE*/
 

@@ -6,7 +6,6 @@ class Addresses extends Component {
     super(props);
     this.state = { 
       number: 2,
-      addresses: []      
     };
 
     this.handleDelete = this.handleDelete.bind(this);
@@ -66,14 +65,26 @@ class Addresses extends Component {
   }
 
   render() {
+    let storedAddresses = this.props.addresses;
     let addresses = [];
     for (let i = 0; i < this.state.number; i++) {
-      let address = this.state.addresses[i];
-      addresses.push(<Address addressNumber={this.state.number} addAddressToList={this.addAddressToList} address={address} onDelete={this.handleDelete} key={i} />);
+      let address = addresses[i];
+      addresses.push(
+      <Address 
+        changeAddress={this.props.changeAddress}
+        storedAddress={storedAddresses[i]}
+        index={i}
+        addressNumber={this.state.number} 
+        addAddressToList={this.addAddressToList} 
+        address={address} 
+        onDelete={this.handleDelete} 
+        key={i} 
+      />);
     }
 
+
     return (
-      <div className="Addresses">
+      <div className="Addresses" ref="addresses">
         {addresses}
         {this.state.number === 5 ? (
           <input type="submit" disabled="disabled" value="Add Address" ></input>

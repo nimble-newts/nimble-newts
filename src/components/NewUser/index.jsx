@@ -1,27 +1,21 @@
 import React, { Component } from 'react';
-import Search from '../Search/index.jsx';
+import SimpleSlider from '../SimpleSlider/index.jsx';
 
 class NewUser extends Component {
   constructor(props) {
-    // nothing is being passed down so can get rid of constructor?
     super(props);
-
+    this.handleNav = this.handleNav.bind(this);
   }
 
   handleNav () {
-    console.log('CLicked!');
+    // pass this down to the button @ carasoul
     document.location.href = '/search';
-  }
-  // Could use this to redirect to /search
-  // handleNav() {
-  //   document.location.href = '/search';
-  // }
+  } 
 
   render() {
     return (  
       <div className="new-user">
-        <button onClick={this.handleNav}>X</button>
-        New USER PAGE HERE!
+        <SimpleSlider changeToSearchOnClick={this.handleNav} />
       </div>
     );
   }

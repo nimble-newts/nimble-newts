@@ -207,7 +207,7 @@ class Search extends Component {
     
     return (
       <div className='searchPage'>
-        <div className="ui page grid">
+        <div className="ui grid">
             <div className="two column row">
                 <div className="column"> 
                     <div className="ui segment">

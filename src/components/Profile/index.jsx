@@ -17,10 +17,18 @@ class Profile extends Component {
   render() {
     return (  
       <div className="Profile">
-        <User />
-        <Friends />
-        <Suggestions />
-        <input type="submit" onClick={this.handleNav} value="Back to Search"></input>
+        <div className='ui grid'>
+          <div className='column'>
+            <div className='ui segment'>
+              <input type="submit" onClick={this.handleNav} value="Back to Search"></input>
+              <User />
+              <div className='ui divider'></div>
+              <Friends />
+              <div className='ui divider'></div>              
+              <Suggestions />
+            </div>
+          </div>
+        </div>
       </div>
     );
   }

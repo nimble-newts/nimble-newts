@@ -12,7 +12,7 @@
     "build": "webpack -d --watch",
     "db": "mongod --dbpath=database/data",
     "heroku-postbuild": "npm run webpack:deploy",
-    "lint": "eslint . --ext .js,.jsx",
+    "lint": "eslint . --ext .js --ext .jsx",
     "pretest": "npm run lint",
     "start": "nodemon server",
     "test": "mocha spec",

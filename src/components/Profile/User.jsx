@@ -29,7 +29,7 @@ class User extends Component {
       }).then(res => {
         return res.json();
       }).then(res => {
-        let defaultAddress = res.defaultAddress || 'none';
+        let defaultAddress = res.defaultAddress || 'no default address';
         this.setState({
           photo: res.photoUrl,
           name: res.name,
@@ -89,7 +89,7 @@ class User extends Component {
       <div className="ui padded segment">
         <div className="ui stackable divided grid">
           <div className="stretched row">
-            <div className="two wide column">
+            <div className="three wide column">
               <img className="ui avatar image small" src={this.state.photo}></img>
             </div>
             <div className="thirteen wide column">
@@ -99,16 +99,16 @@ class User extends Component {
               {this.state.adding === false ? (
                 <span>
                   <div className="ui sub header">
-                      Default Address: {this.state.defaultAddress}
+                      {this.state.defaultAddress}
                   </div>
                   <div>
-                    <button className="ui primary button" onClick={this.handleAdd}>Edit Default</button>
+                    <button className="ui primary button" onClick={this.handleAdd}>Edit Default Address</button>
                   </div>
                 </span>
               ) : (
                 <span>
-                  <div className="ui sub header">
-                      Default Address:
+                  <div className="sub header">
+                      Enter a new default address:
                   </div>
                   <div className="ui small input" style={{height: '30px', verticalAlign: 'middle'}}>
                     <input type="text" defaultValue={this.state.defaultAddress} style={inputStyle} size='50' ref="default" required></input>

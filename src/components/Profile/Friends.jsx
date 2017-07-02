@@ -48,8 +48,10 @@ class Friends extends Component {
   }
 
   handleSave(e) {
-    let saveName = e.target.parentNode.children[1].value;
-    let saveAddress = e.target.parentNode.children[3].value;
+    e.preventDefault();
+    console.log(e.target.children[0].children[0]);
+    let saveName = e.target.children[0].children[0].children[1].value;
+    let saveAddress = e.target.children[0].children[1].children[1].value;
     FB.api('/me', res => {
       let saveOptions = {
         method: 'post',
@@ -75,9 +77,9 @@ class Friends extends Component {
   }
 
   handleDelete(e) {
-    e.preventDefault();
-    let targetName = e.target.parentNode.children[0].textContent;
-    let targetAddress = e.target.parentNode.children[1].textContent;
+    let card = e.target.parentNode.children[0];
+    let targetName = card.children[0].textContent;
+    let targetAddress = card.children[1].textContent;
     FB.api('/me', res => {
       fetch('/friends', {
         method: 'put',
@@ -104,21 +106,43 @@ class Friends extends Component {
     }
 
     return (
-      <div className="Friends">
-        <h2 className="ui header">
-          Saved friends
-        </h2>
-        {this.state.adding === false ? (
-          <button className="ui button" onClick={this.handleAdd}>Add Friend</button>
-        ) : (
-          <div>
-            <label data-for="Name">Name: </label><input type="text" id="Name" required></input>
-            <label data-for="Address">Address: </label><input type="text" id="Address" required></input>
-            <input type="submit" value="Save" onClick={this.handleSave}></input>
-            <input type="submit" value="Cancel" onClick={this.handleCancelAdd}></input>
+      <div className="ui padded grid">
+        <div className="row">
+          <h2 className="ui header">
+            <i className="users icon"></i>
+            <div className="content">
+              Saved Friends
+              <div className="sub header">
+                Store your friends' addresses for faster access
+              </div>
+            </div>
+          </h2>
+          <div className="right floated right aligned seven wide column">
+          {this.state.adding === false ? (
+            <div>
+              <button className="ui secondary button" onClick={this.handleAdd}>Add Friend</button>
+            </div>
+          ) : (
+            <div className="ui segment">
+              <form className="ui form" onSubmit={this.handleSave}>
+              <div className="two fields">
+                <div className="required field">
+                <label>Name: </label>
+                <input type="text" name="name" size="25" required></input>
+                </div>
+                <div className="required field">
+                <label>Address: </label>
+                <input type="text" name="address" size="25" required></input>
+                </div>
+              </div>
+                <button className="ui button">Save</button>
+                <button className="ui button" onClick={this.handleCancelAdd}>Cancel</button>
+              </form>
+            </div>
+          )}
           </div>
-        )}
-        <div className="ui six column grid">
+        </div>
+        <div className="ui cards">
           {friendsArr}
         </div>
       </div>

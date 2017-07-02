@@ -16,14 +16,17 @@ class Profile extends Component {
 
   render() {
     return (  
-      <div className="Profile">
-        <div className="ui padded grid">
-          <div className="column">
-          <button className="ui button" onClick={this.handleNav}>Back to Search</button>
-          <User />
-          <Friends />
-          <div className='ui divider'></div>              
-          <Suggestions />
+      <div className="profile">
+        <div className="ui centered stackable relaxed padded grid container">
+          <div className="fifteen wide column">
+          <button className="ui secondary labeled icon button" onClick={this.handleNav}>
+            <i className="arrow left icon"></i>
+            Search
+          </button>
+          <User className="user" />
+          <Friends className="friends" />
+          <div className='ui section divider'></div>            
+          <Suggestions className="suggestions" />
           </div>
         </div>
       </div>

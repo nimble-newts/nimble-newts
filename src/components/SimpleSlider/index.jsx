@@ -22,11 +22,11 @@ class SimpleSlider extends Component {
     };
 
     var blurbs = {
-      0: 'Welcome to the blahBlah app!',
+      0: 'Welcome to Pinpoint!',
       1: 'We make meetups easy!',
       2: 'Just enter the addresses of you and your friends!',
       3: 'And enter in an activity or type of food!',
-      4: 'We help you find places to go that are the most convienient for everyone!'
+      4: 'We help you pinpoint places to go!'
     };
 
     return (
@@ -50,7 +50,7 @@ class SimpleSlider extends Component {
         <div>
           <img src='http://placekitten.com/g/400/200' />
           <p>{blurbs[4]}</p>
-          <button onClick={this.changeToSearchOnClick}>Let's go!</button>
+          <button className="ui primary button centered" id="annoying-button" onClick={this.changeToSearchOnClick}>Let's go!</button>
         </div>
       </Slider>
     );

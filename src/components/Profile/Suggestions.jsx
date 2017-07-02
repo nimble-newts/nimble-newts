@@ -64,8 +64,12 @@ class Suggestions extends Component {
 
     return (
       <div className="Suggestions">
-        <h1>Saved suggestions</h1>
-        {suggestionsArr}
+        <h2 className="ui header">
+          Saved Suggestions
+        </h2>
+        <div className="ui four column grid">
+          {suggestionsArr}
+        </div>
       </div>
     );
   }

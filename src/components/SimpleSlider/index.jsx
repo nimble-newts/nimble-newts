@@ -6,29 +6,22 @@ class SimpleSlider extends Component {
     super(props);
     this.changeToSearchOnClick = this.props.changeToSearchOnClick;
   }
-    // This slider depends heavily on CSS
-      // Have you tried: 1) npm install
-      // 2) making sure 
-        // @import "../../node_modules/slick-carousel/slick/slick.css";
-        // @import "../../node_modules/slick-carousel/slick/slick-theme.css";
 
   render () {
     var settings = {
-      className: 'blahhhh',
       dots: true,
       infinite: true,
       speed: 500,
       slidesToShow: 1,
       slidesToScroll: 1,
-      // vertical: true // vertical looks awesome! Keep it!
     };
 
     var blurbs = {
-      0: 'Welcome to the blahBlah app!',
+      0: 'Welcome to Pinpoint!',
       1: 'We make meetups easy!',
       2: 'Just enter the addresses of you and your friends!',
       3: 'And enter in an activity or type of food!',
-      4: 'We help you find places to go that are the most convienient for everyone!'
+      4: 'We help you pinpoint places to go!'
     };
 
     return (
@@ -52,7 +45,7 @@ class SimpleSlider extends Component {
         <div>
           <img src='http://placekitten.com/g/400/200' />
           <p>{blurbs[4]}</p>
-          <button onClick={this.changeToSearchOnClick}>Let's go!</button>
+          <button className="ui primary button centered" id="annoying-button" onClick={this.changeToSearchOnClick}>Let's go!</button>
         </div>
       </Slider>
     );
@@ -60,3 +53,4 @@ class SimpleSlider extends Component {
 }
 
 export default SimpleSlider;
+// console.log('Simple slider has loaded...');

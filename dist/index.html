@@ -5,12 +5,11 @@
 	<meta charset="utf-8">
   <title>APP NAME</title>
   <link rel="stylesheet" type="text/css" href="./css/style.css">  
-  <link rel="stylesheet" type="text/css" href="../semantic/dist/semantic.min.css">
   <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBiyYxZdyYs_SdfyCKZQws7209ulb4CXEI"></script>
   <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-  <script src = "../semantic/dist/semantic.min.js"></script>
+  <script src='css.js'></script>
 </head>
 
 <body>
@@ -25,7 +24,7 @@
         status           : true
       });
       FB.AppEvents.logPageView();
-      FB.getLoginStatus(function(response) {
+      FB.getLoginStatus(functin(response) {
         var bundleScript = document.createElement("script");
         bundleScript.type = "text/javascript";
         bundleScript.src = "bundle.js"; 

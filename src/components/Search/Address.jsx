@@ -102,6 +102,10 @@ class Address extends Component {
   }
 
   handleChange(e) {
+    const el = findDOMNode(this.refs.address);
+    $(el).autocomplete({
+      source: this.friendsSource
+    });
     this.setState({ address: e.target.value });
   }
 

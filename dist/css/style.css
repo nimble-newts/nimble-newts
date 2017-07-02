@@ -36,6 +36,16 @@
   text-align: center;
 }
 
+/*PROFILE PAGE*/
+
+.profile {
+  background: #880E4F;
+ }
+
+.profile .ui.grid {
+  background: white;
+}
+
 /* Carasoul (SLICK) */
 
 .slick-slide * {

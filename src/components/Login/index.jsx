@@ -45,18 +45,18 @@ class Login extends Component {
 
   render() {
     return (
-        <div className='ui centered grid login'>
-          <div className='ui segment login'>
-            <h1 className='ui header'> Pinpoint </h1>
-            <div className='sub header'>When you need to meet your friends. We help you find the place.</div>
-            <div className='button'>
-              <button onClick={this.handleLogin} className='ui fluid big facebook button'>
-                <i className='facebook icon'></i>
-                Login
-              </button>
-            </div>
+      <div className='ui centered grid login'>
+        <div className='ui segment login'>
+          <h1 className='ui header'> Pinpoint </h1>
+          <div className='sub header'>When you need to meet your friends. We help you find the place.</div>
+          <div className='button'>
+            <button onClick={this.handleLogin} className='ui fluid big facebook button'>
+              <i className='facebook icon'></i>
+              Login
+            </button>
           </div>
         </div>
+      </div>
     );
   }
 }

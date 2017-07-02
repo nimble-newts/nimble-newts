@@ -33,9 +33,9 @@ class Suggestions extends Component {
   }
 
   handleDelete(e) {
-    e.preventDefault();
-    let targetName = e.target.parentNode.children[0].textContent;
-    let targetAddress = e.target.parentNode.children[1].textContent;
+    let card = e.target.parentNode.children[0];
+    let targetName = card.children[0].textContent;
+    let targetAddress = card.children[1].textContent;
     FB.api('/me', res => {
       fetch('/suggestions', {
         method: 'put',
@@ -63,11 +63,19 @@ class Suggestions extends Component {
     }
 
     return (
-      <div className="Suggestions">
-        <h2 className="ui header">
-          Saved Suggestions
-        </h2>
-        <div className="ui four column grid">
+      <div className="ui padded six column grid">
+        <div className="row">
+          <h2 className="ui header">
+            <i className="marker icon"></i>
+            <div className="content">
+              Saved Suggestions
+              <div className="sub header">
+                View past search results - let's get going!
+              </div>
+            </div>
+          </h2>
+        </div>
+        <div className="ui cards">
           {suggestionsArr}
         </div>
       </div>

@@ -1,10 +1,17 @@
 import React from 'react';
 
-const Friend = ({ name, address, onDelete }) => (
-  <div className="ui column">
-    <div className="Friend-name">{name}</div>
-    <div className="Friend-address">{address}</div>
-    <input type="submit" value="Delete" onClick={onDelete}></input>
+const Friend = ({ name, address, onDelete }) => (                                              
+  <div className="pink card">
+    <div className="content">
+      <div className="header">{name}</div>
+      <div className="meta">
+        {address}
+      </div>
+    </div>
+    <div className="ui bottom attached button" onClick={onDelete}>
+      <i className="minus icon"></i>
+      Delete
+    </div>
   </div>
 );
 

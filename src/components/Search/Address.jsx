@@ -50,6 +50,8 @@ class Address extends Component {
         return res.json();
       }).then(res => {
         this.populateSource(res);
+        
+        $('.ui.accordion').accordion({ collapsible: true });
       });
     });
   }
@@ -115,7 +117,7 @@ class Address extends Component {
     };
 
     return (
-      <div className="item">
+      <div className="ui item">
         <div className="ui search">
           <div className="ui input">
             <input className="prompt" type="text" value={this.state.address} placeholder="Enter address"

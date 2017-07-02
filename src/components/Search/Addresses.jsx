@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { findDOMNode } from 'react-dom';
 import Address from './Address.jsx';
 
 class Addresses extends Component {
@@ -53,10 +54,11 @@ class Addresses extends Component {
 
   handleDelete(e) {
     let currentAddresses = [];
-    let deleteValue = e.target.parentNode.children[0].value;
-    let children = e.target.parentNode.parentNode.children;
+    let target = e.target.parentNode.parentNode.children[0].children[0];
+    let deleteValue = target === undefined ? '' : e.target.parentNode.parentNode.children[0].children[0].value;
+    let children = $(findDOMNode(this.refs.addresses))[0].children;
     for (let i = 0; i < children.length - 1; i++) {
-      let childValue = children[i].children[0].value;
+      let childValue = children[i].children[0].children[0].value;
       if (childValue !== deleteValue) { currentAddresses.push(childValue); }
     }
 
@@ -76,12 +78,12 @@ class Addresses extends Component {
     }
 
     return (
-      <div className="Addresses">
+      <div className="ui items" ref="addresses">
         {addresses}
         {this.state.number === 5 ? (
-          <input type="submit" disabled="disabled" value="Add Address" ></input>
+          <button className="ui disabled secondary button" onClick={this.handleAdd}>Add Address</button>
         ) : (
-          <input type="submit" onClick={this.handleAdd} value="Add Address"></input>
+          <button className="ui secondary button" onClick={this.handleAdd}>Add Address</button>
         )}
       </div>
     );

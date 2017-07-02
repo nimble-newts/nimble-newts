@@ -41,12 +41,6 @@ body .searchPage {
   height: 100%;
 }
 
-.map {
-  width: 500px;
-  height: 500px;
-  border: 1px black solid;
-}
-
 /* Carasoul (SLICK) */
 
 .slick-slide * {

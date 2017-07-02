@@ -105,9 +105,11 @@ class Friends extends Component {
 
     return (
       <div className="Friends">
-        <h1>Saved friends</h1>
+        <h2 className="ui header">
+          Saved friends
+        </h2>
         {this.state.adding === false ? (
-          <input type="submit" value="Add Friend" onClick={this.handleAdd}></input>
+          <button className="ui button" onClick={this.handleAdd}>Add Friend</button>
         ) : (
           <div>
             <label data-for="Name">Name: </label><input type="text" id="Name" required></input>
@@ -116,7 +118,9 @@ class Friends extends Component {
             <input type="submit" value="Cancel" onClick={this.handleCancelAdd}></input>
           </div>
         )}
-        {friendsArr}
+        <div className="ui six column grid">
+          {friendsArr}
+        </div>
       </div>
     );
   }

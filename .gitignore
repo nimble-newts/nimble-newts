@@ -24,6 +24,8 @@ coverage
 build/
 dist/bundle.js
 dist/semantic.js
+dist/fonts
+dist/images
 
 # Dependency directorys
 # Deployed apps should consider commenting these lines out:

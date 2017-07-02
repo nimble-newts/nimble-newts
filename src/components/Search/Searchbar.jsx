@@ -21,9 +21,9 @@ class SearchBar extends Component {
 
   render() {
     return (
-      <div className = "Search-bar">
-        <input type="text" onChange={this.handleSearchText} placeholder='You know you want tacos'></input>
-        <input type="submit" value="Search" onClick={(e) => this.handleSearch(e, this.state.searchText)}></input>
+      <div className ="ui action input">
+        <input type="text" onChange={this.handleSearchText} placeholder='You know you want tacos' size='30'></input>
+        <button className="ui button" onClick={(e) => this.handleSearch(e, this.state.searchText)}>Search</button>
       </div>
     );
   }

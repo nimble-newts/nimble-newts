@@ -102,22 +102,31 @@ class Address extends Component {
 
   render() {
     return (
-      <div className="Address">
-        <input type="text" value={this.state.address} onChange={this.handleChange} ref="address" required></input>
-        {this.state.adding === false ? (
-          <input type="submit" value="Add Friend" onClick={this.handleAdd}></input>
-        ) : (
-          <div>
-            <input type="text" placeholder="Enter a name!" required></input>
-            <input type="submit" value="Save" onClick={this.handleSave}></input>
-            <input type="submit" value="Cancel" onClick={this.handleCancelAdd}></input>
-          </div>
-        )}
-        {this.props.addressNumber > 2 ? (
-          <input type="submit" value="x" onClick={this.props.onDelete}></input>
-        ) : (
-          ''
-        )}
+      <div className="item">
+        <div className="ui input">
+          <input className="ui input" type="text" value={this.state.address} placeholder="Enter address"
+            onChange={this.handleChange} ref="address" size="20" required></input>
+          {this.state.adding === false ? (
+            <button className="ui icon button" onClick={this.handleAdd}>
+              <i className="add user icon"></i>
+            </button>
+          ) : (
+            <div>
+              <input type="text" placeholder="Enter a name!" required></input>
+              <button className="ui button" onClick={this.handleSave}>Save</button>
+              <button className="ui icon button" onClick={this.handleCancelAdd}>
+                <i className="remove icon"></i>
+              </button>
+            </div>
+          )}
+          {this.props.addressNumber > 2 ? (
+            <button className="ui icon button" onClick={this.props.onDelete}>
+              <i className="remove icon"></i>
+            </button>
+          ) : (
+            ''
+          )}
+        </div>
       </div>
     );
   }

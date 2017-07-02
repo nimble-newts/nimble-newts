@@ -202,35 +202,33 @@ class Search extends Component {
     this.marker = [];
   }
 
-  render() {
-    const style = {width: 500, height: 500 , border: '1p black solid'};
-    
+  render() {    
     return (
       <div className='searchPage'>
         <div className="ui grid">
-            <div className="two column row">
-                <div className="column"> 
-                    <div className="ui segment">
-                        <div className="ui vertical segment">
-                          <SearchBar handleSearch={this.handleSearch}/>
-                        </div>
-                        <div className="ui vertical segment">
-                          <Addresses currentAddresses={this.state.currentAddresses}/>
-                        </div>
-                    </div>
+          <div className="two column row">
+            <div className="column"> 
+              <div className="ui segment">
+                <div className="ui vertical segment">
+                  <SearchBar handleSearch={this.handleSearch}/>
                 </div>
-                <div className="column"> 
-                  <div className="ui segment">
-                      <div className="ui vertical segment">
-                        <input type="submit" onClick={this.handleNav} value="Go to profile"></input>        
-                      </div>
-                      <div className="ui vertical segment">
-                        <div ref='map' className='map'></div>
-                      </div>
-                  </div>
+                <div className="ui vertical segment">
+                  <Addresses currentAddresses={this.state.currentAddresses}/>
                 </div>
+              </div>
             </div>
-      </div>
+            <div className="column"> 
+              <div className="ui segment">
+                <div className="ui vertical segment">
+                  <input type="submit" onClick={this.handleNav} value="Go to profile"></input>        
+                </div>
+                <div className="ui vertical segment">
+                  <div ref='map' className='map'></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }

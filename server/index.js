@@ -179,7 +179,7 @@ app.listen(port, _ => {
 });
 
 // when user gets authenticated in
-  // user is redirected to search page
-  // there should be a popup on top of the page
-  // popup should show user how to use the app
-  // user can close the popup to carry on with using the app
+// user is redirected to search page
+// there should be a popup on top of the page
+// popup should show user how to use the app
+// user can close the popup to carry on with using the app

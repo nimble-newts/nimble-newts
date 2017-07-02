@@ -8,7 +8,6 @@ class NewUser extends Component {
   }
 
   handleNav () {
-    // pass this down to the button @ carasoul
     document.location.href = '/search';
   } 
 

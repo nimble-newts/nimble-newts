@@ -14,13 +14,11 @@ class SimpleSlider extends Component {
 
   render () {
     var settings = {
-      className: 'blahhhh',
       dots: true,
       infinite: true,
       speed: 500,
       slidesToShow: 1,
       slidesToScroll: 1,
-      // vertical: true // vertical looks awesome! Keep it!
     };
 
     var blurbs = {
@@ -60,3 +58,4 @@ class SimpleSlider extends Component {
 }
 
 export default SimpleSlider;
+// console.log('Simple slider has loaded...');

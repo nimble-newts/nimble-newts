@@ -19,6 +19,7 @@ app.post('/login', function(req, res) {
   var userID = req.body.userID;
   var token = req.body.token;
 
+  console.log(`USERID: ${userID}, token: ${token}`);
   User.findOne({ 'id': userID }, function(err, person) {
     if (err) { return err; }
 
@@ -39,6 +40,7 @@ app.post('/login', function(req, res) {
 });
 
 app.post('/save', function(req, res) {
+  console.log(`ReqName: ${req.body.name}, reqAddress: ${req.body.address}`);
   var newFriend = {};
   newFriend.name = req.body.name;
   newFriend.address = req.body.address;
@@ -49,6 +51,7 @@ app.post('/save', function(req, res) {
     
     person.friends.push(newFriend);
     person.save(function(err, updated) {
+      console.log(`Updated friends: ${JSON.stringify(updated.friends)}`);
       res.send(updated.friends);
     });
   });
@@ -56,8 +59,11 @@ app.post('/save', function(req, res) {
 
 app.post('/default', function(req, res) {
   var defaultAddress = req.body.defaultAddress;
+  console.log(`Default address: ${defaultAddress}`);
+
   var get = req.body.get;
   User.findOne({ 'id': req.body.userID }, function(err, person) {
+    console.log(`Person default: ${person.defaultAddress}`);
     if (err) { return err; }
     if (person === null) { console.log('error: no user found'); return; }
 
@@ -78,6 +84,7 @@ app.post('/default', function(req, res) {
 app.post('/profile', function(req, res) {
   User.findOne({ 'id': req.body.userID }, function(err, person) {
     if (err) { return err; }
+    console.log(`POST to /profile. Person: ${person}`);
     res.send(JSON.stringify(person));
   });
 });
@@ -182,3 +189,6 @@ app.listen(port, _ => {
 // there should be a popup on top of the page
 // popup should show user how to use the app
 // user can close the popup to carry on with using the app
+
+console.log('Whoo, server loaded...');
+module.exports.app = app;

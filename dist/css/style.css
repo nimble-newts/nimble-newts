@@ -1,32 +1,38 @@
 @import "../../node_modules/slick-carousel/slick/slick.css";
 @import "../../node_modules/slick-carousel/slick/slick-theme.css";
 
-/*GENERAL
 /*TODO: Fix so that the body css is only rendered for the login page*/
-body {
-  background-image: url(../images/background.jpg);
-  background-position: center bottom;  
-  background-size: cover;
-}
 
 /*LOGIN PAGE*/
 
-.login .segment {
+.ui.grid .login {
+  background-color: rgba(136,14,79, 0.6);
+  padding: 75px 15px 60px 15px;
+}
+
+.segment.login{
   position: relative;
-  transform: translateY(300%);
+  transform: translateY(80%);
   text-align: center;
-  background: rgba(112,128,144, 0.3);
-  background-size: 500px;
+  padding: 100px;
  }
 
- .login .header {
+ .segment.login .ui.header {
+  font-size: 45px;
   color: white ;
   text-shadow: 1px 1px 4px#000;
+  text-align: center;
  }
 
-.login .button {
+ .segment.login .sub.header {
+   font-size: 20px;
+   color: white;
+   text-align: center;
+ }
+
+.segment.login .button {
   max-width: 150px;
-  margin: auto;
+  margin: 30px auto auto auto;
   text-align: center;
 }
 

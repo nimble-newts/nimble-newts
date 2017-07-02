@@ -233,11 +233,18 @@ class Search extends Component {
       <div className="ui centered grid">
         <div className="ui wide left visible sidebar vertical menu">
 <<<<<<< HEAD
+<<<<<<< HEAD
           <div className="ui link item" onClick={this.handleNav}>
             <img src={this.state.photo} className="ui mini avatar image"></img>
             {this.state.name}
           </div>
           <h1 className="ui header">PINPOINT</h1>
+=======
+          <div className="item" onClick={this.handleNav}>
+            <img src={this.state.photo} className="ui mini avatar image" data-content="Go to profile"></img>
+            <span>{this.state.name}</span>
+          </div>
+>>>>>>> restyle search page
 =======
           <div className="item" onClick={this.handleNav}>
             <img src={this.state.photo} className="ui mini avatar image" data-content="Go to profile"></img>

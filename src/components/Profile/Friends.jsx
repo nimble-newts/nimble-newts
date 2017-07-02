@@ -118,28 +118,28 @@ class Friends extends Component {
             </div>
           </h2>
           <div className="right floated right aligned seven wide column">
-          {this.state.adding === false ? (
-            <div>
-              <button className="ui secondary button" onClick={this.handleAdd}>Add Friend</button>
-            </div>
-          ) : (
-            <div className="ui segment">
-              <form className="ui form" onSubmit={this.handleSave}>
-              <div className="two fields">
-                <div className="required field">
-                <label>Name: </label>
-                <input type="text" name="name" size="25" required></input>
-                </div>
-                <div className="required field">
-                <label>Address: </label>
-                <input type="text" name="address" size="25" required></input>
-                </div>
+            {this.state.adding === false ? (
+              <div>
+                <button className="ui secondary button" onClick={this.handleAdd}>Add Friend</button>
               </div>
-                <button className="ui button">Save</button>
-                <button className="ui button" onClick={this.handleCancelAdd}>Cancel</button>
-              </form>
-            </div>
-          )}
+            ) : (
+              <div className="ui segment">
+                <form className="ui form" onSubmit={this.handleSave}>
+                  <div className="two fields">
+                    <div className="required field">
+                      <label>Name:</label>
+                      <input type="text" name="name" size="25" required></input>
+                    </div>
+                    <div className="required field">
+                      <label>Address:</label>
+                      <input type="text" name="address" size="25" required></input>
+                    </div>
+                  </div>
+                  <button className="ui button">Save</button>
+                  <button className="ui button" onClick={this.handleCancelAdd}>Cancel</button>
+                </form>
+              </div>
+            )}
           </div>
         </div>
         <div className="ui cards">

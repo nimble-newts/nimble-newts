@@ -19,14 +19,14 @@ class Profile extends Component {
       <div className="profile">
         <div className="ui centered stackable relaxed padded grid container">
           <div className="fifteen wide column">
-          <button className="ui secondary labeled icon button" onClick={this.handleNav}>
-            <i className="arrow left icon"></i>
-            Search
-          </button>
-          <User className="user" />
-          <Friends className="friends" />
-          <div className='ui section divider'></div>            
-          <Suggestions className="suggestions" />
+            <button className="ui secondary labeled icon button" onClick={this.handleNav}>
+              <i className="arrow left icon"></i>
+              Search
+            </button>
+            <User className="user" />
+            <Friends className="friends" />
+            <div className='ui section divider'></div>            
+            <Suggestions className="suggestions" />
           </div>
         </div>
       </div>

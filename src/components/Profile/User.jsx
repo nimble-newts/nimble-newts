@@ -83,7 +83,7 @@ class User extends Component {
       fontSize: '18px',
       paddingLeft: '5px',
       marginRight: '5px'
-    }
+    };
 
     return (
       <div className="ui padded segment">
@@ -95,28 +95,28 @@ class User extends Component {
             <div className="thirteen wide column">
               <div className="row"></div>
               <h1 className="ui header">
-                  {this.state.name}
-              {this.state.adding === false ? (
-                <span>
-                  <div className="ui sub header">
+                {this.state.name}
+                {this.state.adding === false ? (
+                  <span>
+                    <div className="ui sub header">
                       {this.state.defaultAddress}
-                  </div>
-                  <div>
-                    <button className="ui primary button" onClick={this.handleAdd}>Edit Default Address</button>
-                  </div>
-                </span>
-              ) : (
-                <span>
-                  <div className="sub header">
-                      Enter a new default address:
-                  </div>
-                  <div className="ui small input" style={{height: '30px', verticalAlign: 'middle'}}>
-                    <input type="text" defaultValue={this.state.defaultAddress} style={inputStyle} size='50' ref="default" required></input>
-                    <button className="ui button" onClick={this.handleSave}>Save</button>
-                    <button className="ui button" onClick={this.handleCancelAdd}>Cancel</button>
-                  </div>
-                </span>
-              )}
+                    </div>
+                    <div>
+                      <button className="ui primary button" onClick={this.handleAdd}>Edit Default Address</button>
+                    </div>
+                  </span>
+                ) : (
+                  <span>
+                    <div className="sub header">
+                        Enter a new default address:
+                    </div>
+                    <div className="ui small input" style={{height: '30px', verticalAlign: 'middle'}}>
+                      <input type="text" defaultValue={this.state.defaultAddress} style={inputStyle} size='50' ref="default" required></input>
+                      <button className="ui button" onClick={this.handleSave}>Save</button>
+                      <button className="ui button" onClick={this.handleCancelAdd}>Cancel</button>
+                    </div>
+                  </span>
+                )}
               </h1>
             </div> 
           </div>

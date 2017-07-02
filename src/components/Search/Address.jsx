@@ -50,8 +50,6 @@ class Address extends Component {
         return res.json();
       }).then(res => {
         this.populateSource(res);
-        
-        $('.ui.accordion').accordion({ collapsible: true });
       });
     });
   }
@@ -62,9 +60,11 @@ class Address extends Component {
   }
 
   handleAdd(e) {
-    this.setState({
-      adding: true,
-      address: e.target.parentNode.children[0].value
+    this.setState(prevState => {
+      return {
+        adding: true,
+        address: prevState.address
+      };
     });
   }
 
@@ -75,7 +75,7 @@ class Address extends Component {
   }
 
   handleSave(e) {
-    let saveAddress = e.target.parentNode.parentNode.children[0].value;
+    let saveAddress = e.target.parentNode.parentNode.children[0].children[0].value;
     let saveName = e.target.parentNode.children[0].value;
     FB.api('/me', res => {
       let saveOptions = {
@@ -106,35 +106,39 @@ class Address extends Component {
   }
 
   render() {
+    const nameStyle = {
+      display: 'block', 
+      marginTop: '2px',
+      marginBottom: '2px',
+      marginLeft: 'auto',
+      marginRight: 'auto'
+    };
+
     return (
-      <div className="ui item">
+      <div className="item">
         <div className="ui search">
-          <div className="ui icon input">
+          <div className="ui input">
             <input className="prompt" type="text" value={this.state.address} placeholder="Enter address"
-              onChange={this.handleChange} ref="address" size="25" required></input>
-              <div className="ui accordion">
-                <div className="active title">
-                  <button className="circular ui icon button">
-                    <i className="add user icon"></i>
-                  </button>
-                </div>
-                <div className="active content">
-                  <label className="transition hidden" style={{display:'inline-block'}}>Name</label>
-                  <input type="text" placeholder="Enter a name!" className="transition hidden" style={{display:'inline-block'}} required></input>
-                  <button className="circular ui button transition hidden" onClick={this.handleSave}>Save</button>
-                  <button className="circular ui icon button transition hidden" onClick={this.handleCancelAdd}>
-                    <i className="remove icon"></i>
-                  </button>
-                </div>
-              </div>
-            {this.props.addressNumber > 2 ? (
-              <button className="circular ui icon button" onClick={this.props.onDelete}>
-                <i className="remove icon"></i>
-              </button>
-            ) : (
-              ''
-            )}
+              onChange={this.handleChange} ref="address" size="27" style={{marginRight: '3px'}} required></input>
           </div>
+          {this.state.adding === false ? (
+            <button className="circular ui icon button" onClick={this.handleAdd}>
+              <i className="add user icon"></i>
+            </button>
+          ) : (
+            <div className="ui small input" style={{display: 'block'}}>
+              <input type="text" placeholder="Enter a name!" style={nameStyle} required></input>
+              <button className="circular ui button" onClick={this.handleSave}>Save</button>
+              <button className="circular ui button" onClick={this.handleCancelAdd}>Cancel</button>
+            </div>
+          )}
+          {this.props.addressNumber > 2 ? (
+            <button className="circular ui icon button" onClick={this.props.onDelete}>
+              <i className="remove icon"></i>
+            </button>
+          ) : (
+            ''
+          )}
         </div>
       </div>
     );

@@ -62,7 +62,7 @@ class Addresses extends Component {
     for (let i = 0; i < addresses.length - 1; i++) {
       let childValue = addresses[i].firstChild.firstChild.firstChild.value;
       if (childValue !== deleteValue || deleteCount === 1) { 
-        currentAddresses.push(childValue)
+        currentAddresses.push(childValue);
       } else { deleteCount++; }
     }
 

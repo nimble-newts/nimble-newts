@@ -67,9 +67,9 @@ class Search extends Component {
 
   grabAddresses(e) {
     let currentAddresses = [];
-    let addressesDiv = e.target.parentNode.parentNode.children[3].children;
+    let addressesDiv = e.target.parentNode.parentNode.children[4].children;
     for (let i = 0; i < addressesDiv.length - 1; i++) {
-      currentAddresses.push(addressesDiv[i].firstChild.firstChild.value);
+      currentAddresses.push(addressesDiv[i].firstChild.firstChild.firstChild.value);
     }
     return currentAddresses;
   }
@@ -232,10 +232,11 @@ class Search extends Component {
     return (
       <div className="ui centered grid">
         <div className="ui wide left visible sidebar vertical menu">
-          <div className="item" onClick={this.handleNav}>
-            <img src={this.state.photo} className="ui mini avatar image" data-content="Go to profile"></img>
-            <span>{this.state.name}</span>
+          <div className="ui link item" onClick={this.handleNav}>
+            <img src={this.state.photo} className="ui mini avatar image"></img>
+            {this.state.name}
           </div>
+          <h1 className="ui header">PINPOINT</h1>
           <SearchBar handleSearch={this.handleSearch}/>
           <div className="ui horizontal divider">AND</div>
           <Addresses currentAddresses={this.state.currentAddresses}/>

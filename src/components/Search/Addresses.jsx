@@ -55,11 +55,15 @@ class Addresses extends Component {
   handleDelete(e) {
     let currentAddresses = [];
     let target = e.target.parentNode.parentNode.children[0].children[0];
-    let deleteValue = target === undefined ? '' : e.target.parentNode.parentNode.children[0].children[0].value;
-    let children = $(findDOMNode(this.refs.addresses))[0].children;
-    for (let i = 0; i < children.length - 1; i++) {
-      let childValue = children[i].children[0].children[0].value;
-      if (childValue !== deleteValue) { currentAddresses.push(childValue); }
+    // console.log('TARGET', e.target.parentNode.parentNode.children[0].children)
+    let deleteValue = target.value;
+    let addresses = $(findDOMNode(this.refs.addresses))[0].children;
+    let deleteCount = 0;
+    for (let i = 0; i < addresses.length - 1; i++) {
+      let childValue = addresses[i].firstChild.firstChild.firstChild.value;
+      if (childValue !== deleteValue || deleteCount === 1) { 
+        currentAddresses.push(childValue)
+      } else { deleteCount++; }
     }
 
     this.setState(prevState => {

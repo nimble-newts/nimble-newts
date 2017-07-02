@@ -20,11 +20,18 @@ class Address extends Component {
     let friendsArr = [];
     res.forEach(friend => {
       let friendObj = {};
-      friendObj.label = friend.name;
-      friendObj.value = friend.address;
+      friendObj.description = friend.name;
+      friendObj.title = friend.address;
       friendsArr.push(friendObj);
     });
     this.friendsSource = friendsArr;
+
+    $('.ui.search').search({
+      source: this.friendsSource,
+      searchFields: [ 'title', 'description' ],
+      showNoResults: false,
+      searchFullText: false
+    });
   }
 
   componentDidMount() {
@@ -93,39 +100,37 @@ class Address extends Component {
   }
 
   handleChange(e) {
-    const el = findDOMNode(this.refs.address);
-    $(el).autocomplete({
-      source: this.friendsSource
-    });
     this.setState({ address: e.target.value });
   }
 
   render() {
     return (
       <div className="item">
-        <div className="ui input">
-          <input className="ui input" type="text" value={this.state.address} placeholder="Enter address"
-            onChange={this.handleChange} ref="address" size="20" required></input>
-          {this.state.adding === false ? (
-            <button className="ui icon button" onClick={this.handleAdd}>
-              <i className="add user icon"></i>
-            </button>
-          ) : (
-            <div>
-              <input type="text" placeholder="Enter a name!" required></input>
-              <button className="ui button" onClick={this.handleSave}>Save</button>
-              <button className="ui icon button" onClick={this.handleCancelAdd}>
+        <div className="ui search">
+          <div className="ui icon input">
+            <input className="prompt" type="text" value={this.state.address} placeholder="Enter address"
+              onChange={this.handleChange} ref="address" size="20" required></input>
+            {this.state.adding === false ? (
+              <button className="circular ui icon button" onClick={this.handleAdd}>
+                <i className="add user icon"></i>
+              </button>
+            ) : (
+              <div className="ui input">
+                <input type="text" placeholder="Enter a name!" required></input>
+                <button className="circular ui button" onClick={this.handleSave}>Save</button>
+                <button className="circular ui icon button" onClick={this.handleCancelAdd}>
+                  <i className="remove icon"></i>
+                </button>
+              </div>
+            )}
+            {this.props.addressNumber > 2 ? (
+              <button className="circular ui icon button" onClick={this.props.onDelete}>
                 <i className="remove icon"></i>
               </button>
-            </div>
-          )}
-          {this.props.addressNumber > 2 ? (
-            <button className="ui icon button" onClick={this.props.onDelete}>
-              <i className="remove icon"></i>
-            </button>
-          ) : (
-            ''
-          )}
+            ) : (
+              ''
+            )}
+          </div>
         </div>
       </div>
     );

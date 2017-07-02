@@ -46,10 +46,10 @@ class Login extends Component {
 
   render() {
     return (
-      <div className='login'>
-        <div className='ui middle aligned center aligned grid'>
-          <div className='ui segment'>
-            <h1 className='header'> Nimble Newts Ultimate Unicorn Funtime App </h1>
+        <div className='ui centered grid'>
+          <div className='ui segment login'>
+            <h1 className='ui header'> Pinpoint </h1>
+            <div className='sub header'>When you need to meet your friends. We help you find the place.</div>
             <div className='button'>
               <button onClick={this.handleLogin} className='ui fluid big facebook button'>
                 <i className='facebook icon'></i>
@@ -58,7 +58,6 @@ class Login extends Component {
             </div>
           </div>
         </div>
-      </div>
     );
   }
 }

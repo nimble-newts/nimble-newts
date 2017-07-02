@@ -27,7 +27,7 @@ module.exports =
   ,
   {
     entry: {
-      css: [`${SEMANTIC_DIR}/semantic.min.css`, `${SEMANTIC_DIR}/semantic.min.js`]
+      semantic: [`${SEMANTIC_DIR}/semantic.min.css`, `${SEMANTIC_DIR}/semantic.min.js`]
     },
     output: {
       filename: '[name].js',

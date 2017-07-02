@@ -18,6 +18,7 @@ app.post('/login', function(req, res) {
   var res = res;
   var userID = req.body.userID;
   var token = req.body.token;
+
   User.findOne({ 'id': userID }, function(err, person) {
     if (err) { return err; }
 

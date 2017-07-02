@@ -1,3 +1,6 @@
+@import "../../node_modules/slick-carousel/slick/slick.css";
+@import "../../node_modules/slick-carousel/slick/slick-theme.css";
+
 /*GENERAL
 /*TODO: Fix so that the body css is only rendered for the login page*/
 body {
@@ -42,4 +45,16 @@ body .searchPage {
   width: 500px;
   height: 500px;
   border: 1px black solid;
+}
+
+/* Carasoul (SLICK) */
+
+.slick-slide * {
+  margin: 0 auto;
+  text-align: center;
+  display: block;
+}
+
+.slick-slide p {
+  padding: 20px 0;
 }

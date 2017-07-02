@@ -6,11 +6,6 @@ class SimpleSlider extends Component {
     super(props);
     this.changeToSearchOnClick = this.props.changeToSearchOnClick;
   }
-    // This slider depends heavily on CSS
-      // Have you tried: 1) npm install
-      // 2) making sure 
-        // @import "../../node_modules/slick-carousel/slick/slick.css";
-        // @import "../../node_modules/slick-carousel/slick/slick-theme.css";
 
   render () {
     var settings = {

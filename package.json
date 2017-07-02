@@ -25,7 +25,6 @@
     "express": "^4.15.3",
     "mongodb": "^2.2.29",
     "mongoose": "^4.10.8",
-    "nodemon": "^1.11.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-redux": "^5.0.5",
@@ -47,7 +46,9 @@
     "eslint": "^4.0.0",
     "eslint-plugin-react": "^7.1.0",
     "istanbul": "^0.4.5",
+    "gulp": "^3.9.1",
     "mocha": "^3.4.2",
+    "nodemon": "^1.11.0",
     "react-router-dom": "^4.1.1",
     "webpack": "^3.0.0"
   }

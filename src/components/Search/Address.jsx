@@ -20,11 +20,18 @@ class Address extends Component {
     let friendsArr = [];
     res.forEach(friend => {
       let friendObj = {};
-      friendObj.label = friend.name;
-      friendObj.value = friend.address;
+      friendObj.description = friend.name;
+      friendObj.title = friend.address;
       friendsArr.push(friendObj);
     });
     this.friendsSource = friendsArr;
+
+    $('.ui.search').search({
+      source: this.friendsSource,
+      searchFields: [ 'title', 'description' ],
+      showNoResults: false,
+      searchFullText: false
+    });
   }
 
   componentDidMount() {
@@ -53,9 +60,11 @@ class Address extends Component {
   }
 
   handleAdd(e) {
-    this.setState({
-      adding: true,
-      address: e.target.parentNode.children[0].value
+    this.setState(prevState => {
+      return {
+        adding: true,
+        address: prevState.address
+      };
     });
   }
 
@@ -66,7 +75,7 @@ class Address extends Component {
   }
 
   handleSave(e) {
-    let saveAddress = e.target.parentNode.parentNode.children[0].value;
+    let saveAddress = e.target.parentNode.parentNode.children[0].children[0].value;
     let saveName = e.target.parentNode.children[0].value;
     FB.api('/me', res => {
       let saveOptions = {
@@ -93,31 +102,44 @@ class Address extends Component {
   }
 
   handleChange(e) {
-    const el = findDOMNode(this.refs.address);
-    $(el).autocomplete({
-      source: this.friendsSource
-    });
     this.setState({ address: e.target.value });
   }
 
   render() {
+    const nameStyle = {
+      display: 'block', 
+      marginTop: '2px',
+      marginBottom: '2px',
+      marginLeft: 'auto',
+      marginRight: 'auto'
+    };
+
     return (
-      <div className="Address">
-        <input type="text" value={this.state.address} onChange={this.handleChange} ref="address" required></input>
-        {this.state.adding === false ? (
-          <input type="submit" value="Add Friend" onClick={this.handleAdd}></input>
-        ) : (
-          <div>
-            <input type="text" placeholder="Enter a name!" required></input>
-            <input type="submit" value="Save" onClick={this.handleSave}></input>
-            <input type="submit" value="Cancel" onClick={this.handleCancelAdd}></input>
+      <div className="item">
+        <div className="ui search">
+          <div className="ui input">
+            <input className="prompt" type="text" value={this.state.address} placeholder="Enter address"
+              onChange={this.handleChange} ref="address" size="27" style={{marginRight: '3px'}} required></input>
           </div>
-        )}
-        {this.props.addressNumber > 2 ? (
-          <input type="submit" value="x" onClick={this.props.onDelete}></input>
-        ) : (
-          ''
-        )}
+          {this.state.adding === false ? (
+            <button className="circular ui icon button" onClick={this.handleAdd}>
+              <i className="add user icon"></i>
+            </button>
+          ) : (
+            <div className="ui small input" style={{display: 'block'}}>
+              <input type="text" placeholder="Enter a name!" style={nameStyle} required></input>
+              <button className="circular ui button" onClick={this.handleSave}>Save</button>
+              <button className="circular ui button" onClick={this.handleCancelAdd}>Cancel</button>
+            </div>
+          )}
+          {this.props.addressNumber > 2 ? (
+            <button className="circular ui icon button" onClick={this.props.onDelete}>
+              <i className="remove icon"></i>
+            </button>
+          ) : (
+            ''
+          )}
+        </div>
       </div>
     );
   }

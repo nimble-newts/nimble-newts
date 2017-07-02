@@ -14,7 +14,9 @@ class Search extends Component {
         lat: 37.4238253802915,
         lng: -122.0829009197085
       },
-      currentAddresses: []
+      currentAddresses: [],
+      photo: '',
+      name: ''
     };
 
     this.map;
@@ -34,10 +36,29 @@ class Search extends Component {
       zoom: 14,
       center: this.state.dummyData
     });
-
     this.geocoder = new google.maps.Geocoder();
-
+    
     Promise.promisifyAll(this);
+
+    FB.api('/me', res => {
+      fetch('/profile', {
+        method: 'post',
+        body: JSON.stringify({ 
+          'userID': res.id
+        }),
+        headers: { 
+          'Content-Type': 'application/json' 
+        } 
+      }).then(res => {
+        return res.json();
+      }).then(res => {
+        let defaultAddress = res.defaultAddress || 'none';
+        this.setState({
+          name: res.name,
+          photo: res.photoUrl
+        });
+      });
+    });
   }
 
   handleNav() {
@@ -46,9 +67,9 @@ class Search extends Component {
 
   grabAddresses(e) {
     let currentAddresses = [];
-    let addressesDiv = e.target.parentNode.parentNode.parentNode.children[1].children[0].children;
+    let addressesDiv = e.target.parentNode.parentNode.children[4].children;
     for (let i = 0; i < addressesDiv.length - 1; i++) {
-      currentAddresses.push(addressesDiv[i].firstChild.value);
+      currentAddresses.push(addressesDiv[i].firstChild.firstChild.firstChild.value);
     }
     return currentAddresses;
   }
@@ -202,32 +223,26 @@ class Search extends Component {
     this.marker = [];
   }
 
-  render() {    
+  render() {
+    const mapStyle = { 
+      height: '100vh', 
+      width: '100vw'
+    };
+
     return (
-      <div className='searchPage'>
-        <div className="ui grid">
-          <div className="two column row">
-            <div className="column"> 
-              <div className="ui segment">
-                <div className="ui vertical segment">
-                  <SearchBar handleSearch={this.handleSearch}/>
-                </div>
-                <div className="ui vertical segment">
-                  <Addresses currentAddresses={this.state.currentAddresses}/>
-                </div>
-              </div>
-            </div>
-            <div className="column"> 
-              <div className="ui segment">
-                <div className="ui vertical segment">
-                  <input type="submit" onClick={this.handleNav} value="Go to profile"></input>        
-                </div>
-                <div className="ui vertical segment">
-                  <div ref='map' className='map'></div>
-                </div>
-              </div>
-            </div>
+      <div className="ui centered grid">
+        <div className="ui wide left visible sidebar vertical menu">
+          <div className="ui link item" onClick={this.handleNav}>
+            <img src={this.state.photo} className="ui mini avatar image"></img>
+            {this.state.name}
           </div>
+          <h1 className="ui header">PINPOINT</h1>
+          <SearchBar handleSearch={this.handleSearch}/>
+          <div className="ui horizontal divider">AND</div>
+          <Addresses currentAddresses={this.state.currentAddresses}/>
+        </div>
+        <div className="pusher">      
+          <div ref="map" className="ui container" style={mapStyle}></div> 
         </div>
       </div>
     );

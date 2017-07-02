@@ -7,7 +7,6 @@ import Login from './components/Login/index.jsx';
 import Search from './components/Search/index.jsx';
 import Profile from './components/Profile/index.jsx';
 import NewUser from './components/NewUser/index.jsx';
-// let store = createStore(/*reducer*/);
 
 const Routes = ({ store }) => (
   <BrowserRouter>

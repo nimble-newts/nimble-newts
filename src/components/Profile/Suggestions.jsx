@@ -34,7 +34,6 @@ class Suggestions extends Component {
 
   handleDelete(e) {
     let card = e.target.parentNode.children[0];
-    console.log(card);
     let targetName = card.children[0].textContent;
     let targetAddress = card.children[2].children[0].textContent;
     FB.api('/me', res => {

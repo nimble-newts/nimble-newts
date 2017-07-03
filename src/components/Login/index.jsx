@@ -45,47 +45,49 @@ class Login extends Component {
 
   render() {
     return (
-      <div className='ui centered grid login'>
-        <div className="five wide column">
-        <div className='ui raised very padded segment login'>
-          <h1 className='ui header' style={{fontSize: '45px'}}>Pinpoint
-            <div className='sub header' style={{fontSize: '20px'}}>Group activities, on point.</div>
-          </h1>
-          <div className="ui divider"></div>
-          <h3 className="ui left aligned header">
-            <i className="marker icon"></i>
-            <div className="content">
-              Find where to meet, quickly
-              <div className="sub header">
-                Activities at a central location for everyone
+      <div className="main">
+        <div className='ui centered grid login'>
+          <div className="five wide column">
+            <div className='ui raised very padded segment login'>
+              <h1 className='ui header' style={{fontSize: '45px'}}>Pinpoint
+                <div className='sub header' style={{fontSize: '20px'}}>Group activities, on point.</div>
+              </h1>
+              <div className="ui divider"></div>
+              <h3 className="ui left aligned header">
+                <i className="marker icon"></i>
+                <div className="content">
+                  Find convenient places to meet
+                  <div className="sub header">
+                    Activities at a central location for everyone
+                  </div>
+                </div>
+              </h3>            
+              <h3 className="ui left aligned header">
+                <i className="user icon"></i>
+                <div className="content">
+                  Save info for future access
+                  <div className="sub header">
+                    Profile to store friends and suggestions
+                  </div>
+                </div>
+              </h3>
+              <h3 className="ui left aligned header">
+                <i className="hand peace icon"></i>
+                <div className="content">
+                  Stop planning, get partying
+                  <div className="sub header">
+                    Decisions in minutes, partying for hours
+                  </div>
+                </div>
+              </h3>
+              <div className='button'>
+                <button onClick={this.handleLogin} className='ui fluid big facebook button'>
+                  <i className='facebook icon'></i>
+                  Get Started
+                </button>
               </div>
             </div>
-          </h3>            
-          <h3 className="ui left aligned header">
-            <i className="user icon"></i>
-            <div className="content">
-              Save info for future access
-              <div className="sub header">
-                Profile to store friends and suggestions
-              </div>
-            </div>
-          </h3>
-          <h3 className="ui left aligned header">
-            <i className="hand peace icon"></i>
-            <div className="content">
-              Stop planning, get partying
-              <div className="sub header">
-                Decisions in minutes, partying for hours
-              </div>
-            </div>
-          </h3>
-          <div className='button'>
-            <button onClick={this.handleLogin} className='ui fluid big facebook button'>
-              <i className='facebook icon'></i>
-              Get Started
-            </button>
           </div>
-        </div>
         </div>
       </div>
     );

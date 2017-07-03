@@ -224,25 +224,22 @@ class Search extends Component {
   }
 
   render() {
-    const mapStyle = { 
-      height: '100vh', 
-      width: '100vw'
-    };
-
     return (
-      <div className="ui centered grid">
-        <div className="ui wide left visible sidebar vertical menu">
-          <div className="ui link item" onClick={this.handleNav}>
-            <img src={this.state.photo} className="ui mini avatar image"></img>
-            {this.state.name}
+      <div className="search">
+        <div className="ui centered grid">
+          <div className="ui wide left visible sidebar vertical menu">
+            <div className="ui link item" onClick={this.handleNav}>
+              <img src={this.state.photo} className="ui mini avatar image"></img>
+              {this.state.name}
+            </div>
+            <h1 className="ui header">PINPOINT</h1>
+            <SearchBar handleSearch={this.handleSearch}/>
+            <div className="ui horizontal divider">AND</div>
+            <Addresses currentAddresses={this.state.currentAddresses}/>
           </div>
-          <h1 className="ui header">PINPOINT</h1>
-          <SearchBar handleSearch={this.handleSearch}/>
-          <div className="ui horizontal divider">AND</div>
-          <Addresses currentAddresses={this.state.currentAddresses}/>
-        </div>
-        <div className="pusher">      
-          <div ref="map" className="ui container" style={mapStyle}></div> 
+          <div className="pusher">      
+            <div ref="map" className="ui container map"></div> 
+          </div>
         </div>
       </div>
     );

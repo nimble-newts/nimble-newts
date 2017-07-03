@@ -57,7 +57,6 @@ class Suggestions extends Component {
   }
 
   render() {
-    console.log(this.state.suggestions, 'suggestions');
     let suggestionsArr = [];
     for (let i = 0; i < this.state.suggestions.length; i++) {
       let suggest = this.state.suggestions[i];

@@ -110,14 +110,6 @@ class Address extends Component {
   }
 
   render() {
-    const nameStyle = {
-      display: 'block', 
-      marginTop: '2px',
-      marginBottom: '2px',
-      marginLeft: 'auto',
-      marginRight: 'auto'
-    };
-
     return (
       <div className="item">
         <div className="ui search">
@@ -131,7 +123,7 @@ class Address extends Component {
             </button>
           ) : (
             <div className="ui small input" style={{display: 'block'}}>
-              <input type="text" placeholder="Enter a name!" style={nameStyle} required></input>
+              <input type="text" placeholder="Enter a name!" style={{display: 'block', margin: '2px auto'}} required></input>
               <button className="circular ui button" onClick={this.handleSave}>Save</button>
               <button className="circular ui button" onClick={this.handleCancelAdd}>Cancel</button>
             </div>

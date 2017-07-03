@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { findDOMNode } from 'react-dom';
 import Friend from './Friend.jsx';
 
 class Friends extends Component {
@@ -49,9 +50,8 @@ class Friends extends Component {
 
   handleSave(e) {
     e.preventDefault();
-    console.log(e.target.children[0].children[0]);
-    let saveName = e.target.children[0].children[0].children[1].value;
-    let saveAddress = e.target.children[0].children[1].children[1].value;
+    let saveName = findDOMNode(this.refs.name).value;
+    let saveAddress = findDOMNode(this.refs.address).value;
     FB.api('/me', res => {
       let saveOptions = {
         method: 'post',
@@ -117,10 +117,10 @@ class Friends extends Component {
               </div>
             </div>
           </h2>
-          <div className="right floated right aligned seven wide column">
+          <div className="right floated right aligned eight wide column">
             {this.state.adding === false ? (
               <div>
-                <button className="ui secondary button" onClick={this.handleAdd}>Add Friend</button>
+                <button className="ui basic button" onClick={this.handleAdd}>Add Friend</button>
               </div>
             ) : (
               <div className="ui segment">
@@ -128,11 +128,11 @@ class Friends extends Component {
                   <div className="two fields">
                     <div className="required field">
                       <label>Name:</label>
-                      <input type="text" name="name" size="25" required></input>
+                      <input type="text" ref="name"></input>
                     </div>
                     <div className="required field">
                       <label>Address:</label>
-                      <input type="text" name="address" size="25" required></input>
+                      <input type="text" ref="address"></input>
                     </div>
                   </div>
                   <button className="ui button">Save</button>

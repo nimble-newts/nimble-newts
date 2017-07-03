@@ -26,10 +26,8 @@
     "mongodb": "^2.2.29",
     "mongoose": "^4.10.8",
     "react": "^15.6.1",
-    "react-redux": "^5.0.5",
     "react-router": "^4.1.1",
     "react-slick": "^0.14.11",
-    "redux": "^3.7.0",
     "request": "^2.81.0",
     "semantic-ui": "^2.2.10",
     "slick-carousel": "^1.6.0"

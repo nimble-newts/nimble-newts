@@ -45,7 +45,7 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="main">
+      <div className='main'>
         <div className='ui centered grid login'>
           <div className="five wide column">
             <div className='ui raised very padded segment login'>
@@ -95,4 +95,3 @@ class Login extends Component {
 }
 
 export default Login;
-

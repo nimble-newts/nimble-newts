@@ -2,7 +2,10 @@
 **/node_modules
 compiled/**
 dist/bundle.js
+dist/semantic.js
+dist/fonts
+dist/images
 test/**
-database/db.js
+database/**
 semantic/**
 coverage/**

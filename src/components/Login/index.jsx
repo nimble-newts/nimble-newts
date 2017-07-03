@@ -45,12 +45,12 @@ class Login extends Component {
 
   render() {
     return (
-      <div className='main'>
-        <div className='ui centered grid login'>
+      <div className="main">
+        <div className="ui centered grid login">
           <div className="five wide column">
-            <div className='ui raised very padded segment login'>
-              <h1 className='ui header' style={{fontSize: '45px'}}>Pinpoint
-                <div className='sub header' style={{fontSize: '20px'}}>Group activities, on point.</div>
+            <div className="ui raised very padded segment login">
+              <h1 className="ui header" style={{fontSize: '45px'}}>Pinpoint
+                <div className="sub header" style={{fontSize: '20px'}}>Group activities, on point.</div>
               </h1>
               <div className="ui divider"></div>
               <h3 className="ui left aligned header">
@@ -80,9 +80,9 @@ class Login extends Component {
                   </div>
                 </div>
               </h3>
-              <div className='button'>
-                <button onClick={this.handleLogin} className='ui fluid big facebook button'>
-                  <i className='facebook icon'></i>
+              <div className="button">
+                <button onClick={this.handleLogin} className="ui fluid big facebook button">
+                  <i className="facebook icon"></i>
                   Get Started
                 </button>
               </div>

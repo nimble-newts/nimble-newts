@@ -117,7 +117,7 @@ class Friends extends Component {
               </div>
             </div>
           </h2>
-          <div className="right floated right aligned seven wide column">
+          <div className="right floated right aligned ten wide column">
             {this.state.adding === false ? (
               <div>
                 <button className="ui secondary button" onClick={this.handleAdd}>Add Friend</button>
@@ -128,11 +128,11 @@ class Friends extends Component {
                   <div className="two fields">
                     <div className="required field">
                       <label>Name:</label>
-                      <input type="text" name="name" size="25" required></input>
+                      <input type="text" name="name"></input>
                     </div>
                     <div className="required field">
                       <label>Address:</label>
-                      <input type="text" name="address" size="25" required></input>
+                      <input type="text" name="address"></input>
                     </div>
                   </div>
                   <button className="ui button">Save</button>

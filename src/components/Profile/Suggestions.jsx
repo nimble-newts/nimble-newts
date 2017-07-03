@@ -75,6 +75,7 @@ class Suggestions extends Component {
               </div>
             </div>
           </h2>
+          <div className="right floated right aligned ten wide column"></div>
         </div>
         <div className="ui cards">
           {suggestionsArr}

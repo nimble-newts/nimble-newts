@@ -2,37 +2,37 @@
 @import "../../node_modules/slick-carousel/slick/slick-theme.css";
 
 /*TODO: Fix so that the body css is only rendered for the login page*/
+#root { 
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+#root:after {
+  content : "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-image: url('../images/map-markers.png'); 
+  width: 100%;
+  height: 100%;
+  opacity : 1;
+  filter: saturate(0.8) ;
+  z-index: -1;
+}
 
 /*LOGIN PAGE*/
 
-.ui.grid .login {
-  background-color: rgba(136,14,79, 0.6);
-  padding: 75px 15px 60px 15px;
-}
-
 .segment.login{
   position: relative;
-  transform: translateY(80%);
+  top: 15vh;
   text-align: center;
-  padding: 100px;
- }
-
- .segment.login .ui.header {
-  font-size: 45px;
-  color: white ;
-  text-shadow: 1px 1px 4px#000;
-  text-align: center;
- }
-
- .segment.login .sub.header {
-   font-size: 20px;
-   color: white;
-   text-align: center;
  }
 
 .segment.login .button {
   max-width: 150px;
-  margin: 30px auto auto auto;
+  margin: 35px auto auto auto;
   text-align: center;
 }
 

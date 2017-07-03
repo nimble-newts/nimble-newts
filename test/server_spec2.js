@@ -68,7 +68,7 @@ describe('server', function() {
   //Need previous test
   it('should return suggestions from /suggestions', function(done) {
     var requestParams = {
-      method: 'POST',
+      // method: 'POST',
       uri: 'http://localhost:3000/suggestions',
       json: {
         userID: '185270765341213',
@@ -81,7 +81,7 @@ describe('server', function() {
     };
 
     request(requestParams, function (err, res, body) {
-      console.log(res);
+      // console.log(res);
       // console.log(body);
       done();
     })

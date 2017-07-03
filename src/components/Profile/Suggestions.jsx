@@ -35,7 +35,7 @@ class Suggestions extends Component {
   handleDelete(e) {
     let card = e.target.parentNode.children[0];
     let targetName = card.children[0].textContent;
-    let targetAddress = card.children[1].textContent;
+    let targetAddress = card.children[2].children[0].textContent;
     FB.api('/me', res => {
       fetch('/suggestions', {
         method: 'put',
@@ -74,6 +74,7 @@ class Suggestions extends Component {
               </div>
             </div>
           </h2>
+          <div className="right floated right aligned ten wide column"></div>
         </div>
         <div className="ui cards">
           {suggestionsArr}

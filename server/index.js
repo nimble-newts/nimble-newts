@@ -164,7 +164,7 @@ app.put('/suggestions', function(req, res) {
     });
     person.suggestions.splice(removeIndex, 1);
     person.save(function(err, updated) {
-      res.send(updated);
+      res.send(updated.suggestions);
     });
   });
 });

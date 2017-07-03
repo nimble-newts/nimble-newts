@@ -176,12 +176,18 @@ class Search extends Component {
 
       let content =
         `<div>
-          <h3 class="name">${item.name}</h3>
-          <a href="${item.url}" class="url">yelp</a>
-          <div class="address1">${item.location.address1}</div>
-          <div class="city">${item.location.city}</div>
-          <div class="zip">${item.location.zip_code}</div>
-          <input id="marker-save" type="submit" value ="save" data-action="save">
+          <h3 class="ui header" style="margin-top: 5px; margin-bottom: 2px">
+            <span class="name">${item.name}</span>
+            <div class="sub header">
+              <a href="${item.url}" class="url">yelp</a>
+              <div class="address1">${item.location.address1}</div>
+              <div class="city">${item.location.city}</div>
+              <div class="zip">${item.location.zip_code}</div>
+            </div>
+          </h3>
+          <button class="circular ui pink icon button marker-save" style="margin-bottom: 3px" data-action="save">
+            <i class="empty heart icon"></i>
+          </button>
         </div>`;
 
       let infoWindow = new google.maps.InfoWindow({
@@ -194,7 +200,7 @@ class Search extends Component {
     });
 
     let map = findDOMNode(this.refs.map);
-    $(map).on('click', '#marker-save', function(event) { handleSave($(this)); });
+    $(map).on('click', '.circular.ui.pink.icon.button.marker-save', function(event) { handleSave($(this)); });
   }
 
   grabYelpData(text, callback) {
@@ -224,25 +230,22 @@ class Search extends Component {
   }
 
   render() {
-    const mapStyle = { 
-      height: '100vh', 
-      width: '100vw'
-    };
-
     return (
-      <div className="ui centered grid">
-        <div className="ui wide left visible sidebar vertical menu">
-          <div className="ui link item" onClick={this.handleNav}>
-            <img src={this.state.photo} className="ui mini avatar image"></img>
-            {this.state.name}
+      <div className="search">
+        <div className="ui centered grid">
+          <div className="ui wide left visible sidebar vertical menu">
+            <div className="ui link item" onClick={this.handleNav}>
+              <img src={this.state.photo} className="ui mini avatar image"></img>
+              {this.state.name}
+            </div>
+            <h1 className="ui header">PINPOINT</h1>
+            <SearchBar handleSearch={this.handleSearch}/>
+            <div className="ui horizontal divider">AND</div>
+            <Addresses currentAddresses={this.state.currentAddresses}/>
           </div>
-          <h1 className="ui header">PINPOINT</h1>
-          <SearchBar handleSearch={this.handleSearch}/>
-          <div className="ui horizontal divider">AND</div>
-          <Addresses currentAddresses={this.state.currentAddresses}/>
-        </div>
-        <div className="pusher">      
-          <div ref="map" className="ui container" style={mapStyle}></div> 
+          <div className="pusher">      
+            <div ref="map" className="ui container map"></div> 
+          </div>
         </div>
       </div>
     );

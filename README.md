@@ -1,6 +1,6 @@
 # Project Name
-Nimble Newts Ultimate Unicorn Funtime App!!
-> Pithy project description
+Pinpoint
+> Group activities, on point.
 
 ## Team
 
@@ -41,6 +41,26 @@ From within the root directory:
 npm install -g bower
 npm install
 bower install
+```
+
+### Tasks
+
+* npm run build - watches for changes and runs webpack
+* npm run pretest - runs eslinter
+
+To start running a local server, from within the root directory: 
+```sh
+nodemon server/index.js
+npm run build
+mongod
+```
+
+To edit and compile Semantic UI: 
+
+```sh
+npm install -g gulp
+cd semantic
+gulp watch
 ```
 
 ### Roadmap

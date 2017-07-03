@@ -43,7 +43,6 @@ describe('MongoDB Test:', function() {
     it('retrieves new user information', function(done) {
       User.findOne({'name': 'Gideon'}, function (err, results) {
         if(err) {throw err;}
-        console.log('hello', results);
         expect(results.defaultAddress).to.not.be.empty;
         expect(results.friends).to.not.be.empty;
         expect(results.suggestions).to.not.be.empty;        

@@ -45,7 +45,10 @@ bower install
 
 ### Tasks
 
-To start running a local server, from within the root director: 
+* npm run build - watches for changes and runs webpack
+* npm run pretest - runs eslinter
+
+To start running a local server, from within the root directory: 
 ```sh
 nodemon server/index.js
 npm run build

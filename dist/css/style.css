@@ -90,11 +90,13 @@ body {
 .profile {
   background: #880E4F;
   width: 100%;
+  min-height: 100vh;
   height: 100%;
  }
 
 .profile .ui.grid.container {
   background: white;
+  min-height: 100vh;
   height: 100%;
   padding-bottom: 40px;
 }

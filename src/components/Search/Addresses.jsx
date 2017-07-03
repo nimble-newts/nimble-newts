@@ -40,7 +40,8 @@ class Addresses extends Component {
     let currentAddresses = [];
     let children = e.target.parentNode.children;
     for (let i = 0; i < children.length - 1; i++) {
-      currentAddresses.push(children[i].children[0].value);
+      let value = children[i].outerText || children[i].children[0].value;
+      currentAddresses.push(value);
     }
     currentAddresses.push('');
 

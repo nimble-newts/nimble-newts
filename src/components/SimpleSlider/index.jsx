@@ -17,40 +17,42 @@ class SimpleSlider extends Component {
     };
 
     var blurbs = {
-      0: 'Welcome to Pinpoint!',
-      1: 'We make meetups easy!',
-      2: 'Just enter the addresses of you and your friends!',
-      3: 'And enter in an activity or type of food!',
-      4: 'We help you pinpoint places to go!'
+      0: 'Enter a search term and addresses to quickly see central meetup locations.',
+      1: 'Pin the search results for later viewing in your profile.',
+      2: 'Save addresses as friends to easily use them again in future searches.',
+      3: 'Store a default address that gets automatically pulled into the search addresses.',
+      4: 'Get searching!'
     };
 
     return (
-      <Slider {...settings}>
-        <div>
-          <img src='http://placekitten.com/g/400/200' />
-          <p>{blurbs[0]}</p>
+      <div className="row">
+        <div className="fourteen wide column">
+        <Slider {...settings}>
+          <div>
+            <img src='./dist/images/search.png' />
+            <p>{blurbs[0]}</p>
+          </div>
+          <div>
+            <img src='./dist/images/save-suggestions.png' />
+            <p>{blurbs[1]}</p>
+          </div>
+          <div>
+            <img src='./dist/images/save-friends.png' />
+            <p>{blurbs[2]}</p>
+          </div>
+          <div>
+            <img src='./dist/images/default-address.png' />
+            <p>{blurbs[3]}</p>
+          </div>
+          <div>
+            <img src='./dist/images/final.png' />
+            <p>{blurbs[4]}</p>
+          </div>
+        </Slider>
         </div>
-        <div>
-          <img src='http://placekitten.com/g/400/200' />
-          <p>{blurbs[1]}</p>
-        </div>
-        <div>
-          <img src='http://placekitten.com/g/400/200' />
-          <p>{blurbs[2]}</p>
-        </div>
-        <div>
-          <img src='http://placekitten.com/g/400/200' />
-          <p>{blurbs[3]}</p>
-        </div>
-        <div>
-          <img src='http://placekitten.com/g/400/200' />
-          <p>{blurbs[4]}</p>
-          <button className="ui primary button centered" id="annoying-button" onClick={this.changeToSearchOnClick}>Let's go!</button>
-        </div>
-      </Slider>
+      </div>
     );
   }
 }
 
 export default SimpleSlider;
-// console.log('Simple slider has loaded...');

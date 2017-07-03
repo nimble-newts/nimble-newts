@@ -1,12 +1,17 @@
 @import "../../node_modules/slick-carousel/slick/slick.css";
 @import "../../node_modules/slick-carousel/slick/slick-theme.css";
 
+body { 
+  height: 100%;
+  width: 100%;
+}
+
 /*LOGIN PAGE*/
 
 .main { 
   position: relative;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
 }
 
 .main:after {
@@ -40,13 +45,13 @@
 
 .profile {
   background: #880E4F;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
  }
 
 .profile .ui.grid.container {
   background: white;
-  height: 100vh;
+  height: 100%;
 }
 
 /*SEARCH PAGE*/

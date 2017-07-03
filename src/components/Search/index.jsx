@@ -176,12 +176,18 @@ class Search extends Component {
 
       let content =
         `<div>
-          <h3 class="name">${item.name}</h3>
-          <a href="${item.url}" class="url">yelp</a>
-          <div class="address1">${item.location.address1}</div>
-          <div class="city">${item.location.city}</div>
-          <div class="zip">${item.location.zip_code}</div>
-          <input id="marker-save" type="submit" value ="save" data-action="save">
+          <h3 class="ui header" style="margin-top: 5px; margin-bottom: 2px">
+            <span class="name">${item.name}</span>
+            <div class="sub header">
+              <a href="${item.url}" class="url">yelp</a>
+              <div class="address1">${item.location.address1}</div>
+              <div class="city">${item.location.city}</div>
+              <div class="zip">${item.location.zip_code}</div>
+            </div>
+          </h3>
+          <button class="circular ui pink icon button marker-save" style="margin-bottom: 3px" data-action="save">
+            <i class="empty heart icon"></i>
+          </button>
         </div>`;
 
       let infoWindow = new google.maps.InfoWindow({
@@ -194,7 +200,7 @@ class Search extends Component {
     });
 
     let map = findDOMNode(this.refs.map);
-    $(map).on('click', '#marker-save', function(event) { handleSave($(this)); });
+    $(map).on('click', '.circular.ui.pink.icon.button.marker-save', function(event) { handleSave($(this)); });
   }
 
   grabYelpData(text, callback) {

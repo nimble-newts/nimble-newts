@@ -19,17 +19,34 @@ app.post('/login', function(req, res) {
   var userID = req.body.userID;
   var token = req.body.token;
 
+  console.log(`LOGGING IN userID: ${userID}, token: ${token}`);
   User.findOne({ 'id': userID }, function(err, person) {
     if (err) { return err; }
 
     if (person === null) {
       request('https://graph.facebook.com/' + userID + '?fields=name, picture.width(500)&access_token=' + token, function(err, response, body) {
         body = JSON.parse(body);
-        var user = new User({ 'id': userID, 'photoUrl': body.picture.data.url, 'name': body.name });
-        user.save(function(err, saved) {
-          if (err) { return err; }
-          res.send({ redirect: '/newUser' });
-        });
+        if (err) {
+          return err;
+        } else {
+          var userDeets = {
+            'id': userID,
+            'name': body.name
+          };
+          
+          if (body.picture) {
+            userDeets.photoUrl = body.picture.data.url;
+          } else {
+            userDeets.photoUrl = 'http://placekitten.com/g/400/200';
+          }
+
+          var user = new User(userDeets);
+          user.save(function(err, saved) {
+            if (err) { return err; }
+            res.send({ redirect: '/newUser' });
+          });
+        }
+        
       });
     } else {
       console.log('user already exists!');
@@ -39,6 +56,7 @@ app.post('/login', function(req, res) {
 });
 
 app.post('/save', function(req, res) {
+  console.log(`ReqName: ${req.body.name}, reqAddress: ${req.body.address}`);
   var newFriend = {};
   newFriend.name = req.body.name;
   newFriend.address = req.body.address;
@@ -46,7 +64,6 @@ app.post('/save', function(req, res) {
   User.findOne({ 'id': req.body.userID }, function(err, person) {
     if (err) { return err; }
     if (person === null) { console.log('error: no user found'); return; }
-    
     person.friends.push(newFriend);
     person.save(function(err, updated) {
       res.send(updated.friends);
@@ -56,19 +73,21 @@ app.post('/save', function(req, res) {
 
 app.post('/default', function(req, res) {
   var defaultAddress = req.body.defaultAddress;
+  console.log(`Default address: ${defaultAddress}`);
+
   var get = req.body.get;
+  console.log(`Get? ${get}`);
   User.findOne({ 'id': req.body.userID }, function(err, person) {
     if (err) { return err; }
     if (person === null) { console.log('error: no user found'); return; }
 
     if (get === true) {
-      console.log('returning info!'); 
       var sendDefault = person.defaultAddress || '';
       res.send(sendDefault); 
     } else {  
-      console.log('saving default address:', defaultAddress);
       person.defaultAddress = defaultAddress;
       person.save(function(err, updated) {
+        console.log(typeof updated.defaultAddress);
         res.send(updated.defaultAddress);
       });
     }
@@ -130,7 +149,6 @@ app.post('/searches', function(req, res) {
 });
 
 app.post('/suggestions', function(req, res) {
-  console.log('saving location:', req.body.name);
   let locInfo = {
     name: req.body.name,
     address: req.body.address,
@@ -182,3 +200,5 @@ app.listen(port, _ => {
 // there should be a popup on top of the page
 // popup should show user how to use the app
 // user can close the popup to carry on with using the app
+
+module.exports.app = app;

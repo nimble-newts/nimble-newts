@@ -25,7 +25,6 @@ body {
   background-image: url('../images/map-markers2.png'); 
   background-size: 100%;
   opacity : 1;
-  filter: saturate(0.8) ;
   z-index: -1;
 }
 
@@ -39,6 +38,51 @@ body {
   max-width: 150px;
   margin: 35px auto auto auto;
   text-align: center;
+}
+
+/*NEW USER PAGE*/
+
+.new-user {
+  background: #880E4F;
+  width: 100vw;
+  height: 100vh;
+ }
+
+ .segment.user {
+  position: relative;
+  top: 3%;
+  text-align: center;
+ }
+
+ .ui.header.welcome {
+  font-size: 35px;
+ }
+
+.ui.header {
+  margin-bottom: -20px;
+}
+
+.slick-slide {
+  height: 60%;
+  width: 45%;
+}
+
+.slick-slide * {
+  margin: 0 auto;
+  text-align: center;
+  display: block;
+  height: 90%;
+  width: 90%;
+}
+
+.slick-slide p {
+  font-size: 17px;
+  padding-top: 10px;
+  padding-bottom: 5px;
+}
+
+.slick-slide img {
+  border: 1px solid gray;
 }
 
 /*PROFILE PAGE*/
@@ -59,21 +103,4 @@ body {
 .ui.container.map {
   width: 100vw;
   height: 100vh;
-}
-
-/* Carasoul (SLICK) */
-
-.slick-slide * {
-  margin: 0 auto;
-  text-align: center;
-  display: block;
-}
-
-.slick-slide p {
-  padding: 20px 0;
-}
-
-#annoying-button {
-  display: block;
-  margin: 0 auto;
 }

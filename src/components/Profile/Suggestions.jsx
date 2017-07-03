@@ -34,8 +34,9 @@ class Suggestions extends Component {
 
   handleDelete(e) {
     let card = e.target.parentNode.children[0];
+    console.log(card);
     let targetName = card.children[0].textContent;
-    let targetAddress = card.children[1].textContent;
+    let targetAddress = card.children[2].children[0].textContent;
     FB.api('/me', res => {
       fetch('/suggestions', {
         method: 'put',
@@ -56,6 +57,7 @@ class Suggestions extends Component {
   }
 
   render() {
+    console.log(this.state.suggestions, 'suggestions');
     let suggestionsArr = [];
     for (let i = 0; i < this.state.suggestions.length; i++) {
       let suggest = this.state.suggestions[i];

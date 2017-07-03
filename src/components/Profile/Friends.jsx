@@ -117,10 +117,10 @@ class Friends extends Component {
               </div>
             </div>
           </h2>
-          <div className="right floated right aligned ten wide column">
+          <div className="right floated right aligned eight wide column">
             {this.state.adding === false ? (
               <div>
-                <button className="ui secondary button" onClick={this.handleAdd}>Add Friend</button>
+                <button className="ui basic button" onClick={this.handleAdd}>Add Friend</button>
               </div>
             ) : (
               <div className="ui segment">

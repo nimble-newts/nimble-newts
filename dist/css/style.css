@@ -52,6 +52,7 @@ body {
 .profile .ui.grid.container {
   background: white;
   height: 100%;
+  padding-bottom: 40px;
 }
 
 /*SEARCH PAGE*/
